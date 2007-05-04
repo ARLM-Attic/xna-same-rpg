@@ -128,7 +128,7 @@ namespace RPGLibrary
         }
 
         /// <summary>This method gets the statusEffects attribute.</summary>
-        public int StatusEffects
+        public List<StatusEffect> StatusEffects
         {
             get { return this.statusEffects; }
         }
@@ -211,7 +211,7 @@ namespace RPGLibrary
             if (HasStatusEffect(se))
             {
                 StatusEffect statusEffect = this.GetStatusEffect(se);
-                this.statusEffect.Remove(statusEffect);
+                this.statusEffects.Remove(statusEffect);
             }
         }
         #endregion

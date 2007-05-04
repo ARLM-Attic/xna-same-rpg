@@ -76,6 +76,7 @@ namespace RPGLibrary
             this.accessories = new Hashtable();
         }
         #endregion
+        
 
         #region Methods
         public bool KeyExists(string s, Hashtable ht)
@@ -93,16 +94,15 @@ namespace RPGLibrary
         {
             Hashtable ht = this.items;
             string key = i.Name;
-        }
-/*            if (KeyExists(key, ht) && ht[key]) < MaxItems)
+            if (KeyExists(key, ht) && (int)ht[key] < MaxItems)
             {
-                ht[key]++;
+                this.items[key] = (int)ht[key] + 1;
             }
             else
             {
                 ht.Add(key, 1);
             }
-       }*/
+       }
 
         public void RemoveItem(Item i)
         {
@@ -110,9 +110,9 @@ namespace RPGLibrary
             string key = i.Name;
             if (KeyExists(key, ht))
             {
-                if (ht[key] > 1)
+                if ((int)ht[key] > 1)
                 {
-                    ht[key]--;
+                    this.items[key] = (int)this.items[key] - 1;
                 }
                 else
                 {
@@ -130,11 +130,11 @@ namespace RPGLibrary
         #region Weapon Methods
         public void AddWeapon(Weapon w)
         {
-            HashTable ht = this.weapons;
+            Hashtable ht = this.weapons;
             string key = w.Name;
-            if (KeyExists(key, ht) && ht[key] < MaxWeapons)
+            if (KeyExists(key, ht) && (int)ht[key] < MaxWeapons)
             {
-                ht[key]++;
+                this.weapons[key] = (int)ht[key] + 1;
             }
             else
             {
@@ -144,13 +144,13 @@ namespace RPGLibrary
 
         public void RemoveWeapon(Weapon w)
         {
-            HashTable ht = this.weapons;
+            Hashtable ht = this.weapons;
             string key = w.Name;
             if (KeyExists(key, ht))
             {
-                if (ht[key] > 1)
+                if ((int)ht[key] > 1)
                 {
-                    ht[key]--;
+                    this.weapons[key] = (int)ht[key] - 1;
                 }
                 else
                 {
@@ -168,11 +168,11 @@ namespace RPGLibrary
         #region Shield Methods
         public void AddShield(Shield s)
         {
-            HashTable ht = this.shields;
+            Hashtable ht = this.shields;
             string key = s.Name;
-            if (KeyExists(key, ht) && ht[key] < MaxShields)
+            if (KeyExists(key, ht) && (int)ht[key] < MaxShields)
             {
-                ht[key]++;
+                this.shields[key] = (int)ht[key] + 1;
             }
             else
             {
@@ -182,13 +182,13 @@ namespace RPGLibrary
 
         public void RemoveShield(Shield s)
         {
-            HashTable ht = this.shields;
+            Hashtable ht = this.shields;
             string key = s.Name;
             if (KeyExists(key, ht))
             {
-                if (ht[key] > 1)
+                if ((int)ht[key] > 1)
                 {
-                    ht[key]--;
+                    this.shields[key] = (int)ht[key] - 1;
                 }
                 else
                 {
@@ -206,11 +206,11 @@ namespace RPGLibrary
         #region Helm Methods
         public void AddHelm(Helm h)
         {
-            HashTable ht = this.helms;
+            Hashtable ht = this.helms;
             string key = h.Name;
-            if (KeyExists(key, ht) && ht[key] < MaxHelms)
+            if (KeyExists(key, ht) && (int)ht[key] < MaxHelms)
             {
-                ht[key]++;
+                this.helms[key] = (int)ht[key] + 1;
             }
             else
             {
@@ -220,13 +220,13 @@ namespace RPGLibrary
 
         public void RemoveHelm(Helm h)
         {
-            HashTable ht = this.helms;
+            Hashtable ht = this.helms;
             string key = h.Name;
             if (KeyExists(key, ht))
             {
-                if (ht[key] > 1)
+                if ((int)ht[key] > 1)
                 {
-                    ht[key]--;
+                    this.helms[key] = (int)ht[key] - 1;
                 }
                 else
                 {
@@ -244,11 +244,11 @@ namespace RPGLibrary
         #region Armor Methods
         public void AddArmor(Armor a)
         {
-            HashTable ht = this.armors;
+            Hashtable ht = this.armors;
             string key = a.Name;
-            if (KeyExists(key, ht) && ht[key] < MaxArmors)
+            if (KeyExists(key, ht) && (int)ht[key] < MaxArmors)
             {
-                ht[key]++;
+                this.armors[key] = (int)ht[key] + 1;
             }
             else
             {
@@ -258,13 +258,13 @@ namespace RPGLibrary
 
         public void RemoveArmor(Armor a)
         {
-            HashTable ht = this.armors;
+            Hashtable ht = this.armors;
             string key = a.Name;
             if (KeyExists(key, ht))
             {
-                if (ht[key] > 1)
+                if ((int)ht[key] > 1)
                 {
-                    ht[key]--;
+                    this.armors[key] = (int)ht[key] - 1;
                 }
                 else
                 {
@@ -282,11 +282,11 @@ namespace RPGLibrary
         #region Accessory Methods
         public void AddAccessory(Accessory a)
         {
-            HashTable ht = this.accessories;
+            Hashtable ht = this.accessories;
             string key = a.Name;
-            if (KeyExists(key, ht) && ht[key] < MaxAccessories)
+            if (KeyExists(key, ht) && (int)ht[key] < MaxAccessories)
             {
-                ht[key]++;
+                this.accessories[key] = (int)ht[key] + 1;
             }
             else
             {
@@ -296,13 +296,13 @@ namespace RPGLibrary
 
         public void RemoveAccessory(Accessory a)
         {
-            HashTable ht = this.accessories;
+            Hashtable ht = this.accessories;
             string key = a.Name;
             if (KeyExists(key, ht))
             {
-                if (ht[key] > 1)
+                if ((int)ht[key] > 1)
                 {
-                    ht[key]--;
+                    this.accessories[key] = (int)ht[key] - 1;
                 }
                 else
                 {
