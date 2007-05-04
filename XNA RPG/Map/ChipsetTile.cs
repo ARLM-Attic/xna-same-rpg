@@ -11,7 +11,7 @@ using Microsoft.Xna.Framework.Storage;
 
 namespace XNA_RPG.Map
 {
-    public class Tile
+    public class ChipsetTile
     {
         public const int WIDTH = 64;
         public const int HEIGHT = 64;
@@ -60,7 +60,7 @@ namespace XNA_RPG.Map
         #endregion
 
 
-        public Tile(string assetName, int chipsetIndex, bool isWalkable)
+        public ChipsetTile(string assetName, int chipsetIndex, bool isWalkable)
         {
             this.assetName = assetName;
             this.chipsetIndex = chipsetIndex;
