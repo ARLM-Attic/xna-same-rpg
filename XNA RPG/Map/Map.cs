@@ -20,7 +20,7 @@ namespace XNA_RPG.Map
         private int[,] bottomLayer;
         private int[,] middleLayer;
         private int[,] topLayer;
-        private Tile[,] objectLayer;
+        private ChipsetTile[,] objectLayer;
 
 
         private Vector2 focus;
@@ -79,7 +79,7 @@ namespace XNA_RPG.Map
             }
         }
 
-        public Tile[,] ObjectLayer
+        public ChipsetTile[,] ObjectLayer
         {
             get
             {
@@ -111,7 +111,7 @@ namespace XNA_RPG.Map
             bottomLayer = new int[width, height];
             middleLayer = new int[width, height];
             topLayer = new int[width, height];
-            objectLayer = new Tile[width, height];
+            objectLayer = new ChipsetTile[width, height];
 
 
         }

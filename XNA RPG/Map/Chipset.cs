@@ -8,7 +8,7 @@ namespace XNA_RPG.Map
     {
         private int width;
         private int height;
-        private List<Tile> tiles;
+        private List<ChipsetTile> tiles;
 
         #region Accessors
         public int Width
@@ -27,7 +27,7 @@ namespace XNA_RPG.Map
             }
         }
 
-        public List<Tile> Tiles
+        public List<ChipsetTile> Tiles
         {
             get
             {
@@ -43,14 +43,14 @@ namespace XNA_RPG.Map
 
         public Chipset(int width, int height)
         {
-            tiles = new List<Tile>();
+            tiles = new List<ChipsetTile>();
             this.width = width;
             this.height = height;
         }
 
-        public void AddTile(string assetName)
+        public void AddTile(string assetName, bool isWalkable)
         {
-            tiles.Add(new Tile(assetName, tiles.Count));
+            tiles.Add(new ChipsetTile(assetName, tiles.Count, isWalkable));
             Console.WriteLine(tiles[0]);
         }
 

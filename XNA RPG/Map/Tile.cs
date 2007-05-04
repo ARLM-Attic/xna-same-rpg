@@ -18,6 +18,7 @@ namespace XNA_RPG.Map
         private string assetName;
         private int chipsetIndex;
         private Texture2D texture;
+        private bool isWalkable;
 
         #region Accessors
         
@@ -59,10 +60,11 @@ namespace XNA_RPG.Map
         #endregion
 
 
-        public Tile(string assetName, int chipsetIndex)
+        public Tile(string assetName, int chipsetIndex, bool isWalkable)
         {
             this.assetName = assetName;
             this.chipsetIndex = chipsetIndex;
+            this.isWalkable = isWalkable;
             Console.WriteLine(ToString());
         }
 
