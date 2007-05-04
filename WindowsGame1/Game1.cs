@@ -18,6 +18,9 @@ namespace WindowsGame1
     /// </summary>
     public class Game1 : Microsoft.Xna.Framework.Game
     {
+        #region Variables
+        enum Direction { LEFT, RIGHT, UP, DOWN };
+
         GraphicsDeviceManager graphics;
         ContentManager content;
 
@@ -33,6 +36,14 @@ namespace WindowsGame1
         Vector2 focus;
         Vector2 characterPosition;
         float walkingSpeed;
+        Direction direction;
+
+
+        Vector2 oldCharPos;
+        Vector2 oldFocus;
+
+
+        #endregion
 
 
         public Game1()
@@ -68,7 +79,6 @@ namespace WindowsGame1
 
 
 
-
             base.Initialize();
         }
 
@@ -78,7 +88,7 @@ namespace WindowsGame1
             //Create Chipsets
             chipset = new Chipset(36, 36);
             chipset.AddTile("Content\\Grass1", true);
-            chipset.AddTile("Content\\dirt", true);
+            chipset.AddTile("Content\\dirt", false);
 
             systemchipset = new Chipset(36, 36);
             systemchipset.AddTile("Content\\blank", false);
@@ -148,6 +158,7 @@ namespace WindowsGame1
         public void InitializeCharacter()
         {
             mainCharacter = new Combatant();
+            direction = Direction.DOWN;
         }
 
 
@@ -205,18 +216,46 @@ namespace WindowsGame1
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Update(GameTime gameTime)
         {
+            if (characterPosition != null)
+                oldCharPos = characterPosition;
+            if (focus != null)
+                oldFocus = focus;
+
             // Allows the game to exit
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)
                 this.Exit();
 
-            if (Keyboard.GetState().IsKeyDown(Keys.Up) == true && characterPosition.Y == graphics.GraphicsDevice.Viewport.Height / 2)
+            #region Basic Map Movement
+
+            if (Keyboard.GetState().IsKeyDown(Keys.Up) == true
+                && characterPosition.Y == graphics.GraphicsDevice.Viewport.Height / 2)
+            {
                 focus.Y -= walkingSpeed / 100.0f;
-            if (Keyboard.GetState().IsKeyDown(Keys.Down) == true && characterPosition.Y == graphics.GraphicsDevice.Viewport.Height / 2)
+                direction = Direction.UP;
+
+            }
+
+            if (Keyboard.GetState().IsKeyDown(Keys.Down) == true
+                && characterPosition.Y == graphics.GraphicsDevice.Viewport.Height / 2)
+            {
                 focus.Y += walkingSpeed / 100.0f;
-            if (Keyboard.GetState().IsKeyDown(Keys.Right) == true && characterPosition.X == graphics.GraphicsDevice.Viewport.Width / 2)
+                direction = Direction.DOWN;
+            }
+
+            if (Keyboard.GetState().IsKeyDown(Keys.Right) == true
+                && characterPosition.X == graphics.GraphicsDevice.Viewport.Width / 2)
+            {
                 focus.X += walkingSpeed / 100.0f;
-            if (Keyboard.GetState().IsKeyDown(Keys.Left) == true && characterPosition.X == graphics.GraphicsDevice.Viewport.Width / 2)
+                direction = Direction.RIGHT;
+            }
+
+            if (Keyboard.GetState().IsKeyDown(Keys.Left) == true
+                && characterPosition.X == graphics.GraphicsDevice.Viewport.Width / 2)
+            {
                 focus.X -= walkingSpeed / 100.0f;
+                direction = Direction.LEFT;
+            }
+            #endregion
 
             #region Map Boundary Checks
             if (focus.X >= map.Width - screenSize.X)
@@ -323,7 +362,7 @@ namespace WindowsGame1
                 #endregion
 
                 #region Making sure character stays on the screen
-          
+
                 if (characterPosition.X >= (graphics.GraphicsDevice.Viewport.Width) - ChipsetTile.WIDTH)
                 {
                     characterPosition.X = (graphics.GraphicsDevice.Viewport.Width) - ChipsetTile.WIDTH;
@@ -344,7 +383,44 @@ namespace WindowsGame1
             #endregion
 
             #region CollisionChecking
+
+            bool collision;
+
+            //4 tile checks
+            Vector2 charac = GetMapPosition(characterPosition);
+
+            Vector2 tile1 = new Vector2((int)charac.X, (int)charac.Y);
+            Vector2 tile2 = new Vector2(tile1.X + 1, tile1.Y);
+            Vector2 tile3 = new Vector2(tile1.X, tile1.Y + 1);
+            Vector2 tile4 = new Vector2(tile1.X + 1, tile1.Y + 1);
+
+            try
+            {
+                if (chipset.Tiles[map.BottomLayer[(int)tile1.X, (int)tile1.Y]].IsWalkable == true
+                    && chipset.Tiles[map.BottomLayer[(int)tile2.X, (int)tile2.Y]].IsWalkable == true
+                    && chipset.Tiles[map.BottomLayer[(int)tile3.X, (int)tile3.Y]].IsWalkable == true
+                    && chipset.Tiles[map.BottomLayer[(int)tile4.X, (int)tile4.Y]].IsWalkable == true)
+                {
+                    collision = false;
+                }
+                else
+                {
+                    collision = true;
+                }
+            }
+            catch (Exception e)
+            {
+                collision = true;
+                Console.WriteLine("caught exception");
+            }
             
+
+
+            if (collision == true)
+            {
+                characterPosition = oldCharPos;
+                focus = oldFocus;
+            }
             #endregion
 
             base.Update(gameTime);
@@ -393,6 +469,16 @@ namespace WindowsGame1
         {
 
             spritebatch.Draw(mainCharacter.Texture, new Vector2(characterPosition.X, characterPosition.Y), mainCharacter.GetCurrentFrame(), Color.White);
+        }
+
+        public Vector2 GetMapPosition(Vector2 screenPosition)
+        {
+            Vector2 mapPosition = new Vector2();
+
+            mapPosition.X = focus.X + (screenPosition.X / ChipsetTile.WIDTH);
+            mapPosition.Y = focus.Y + (screenPosition.Y / ChipsetTile.HEIGHT);
+
+            return mapPosition;
         }
     }
 }

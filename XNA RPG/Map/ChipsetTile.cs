@@ -57,6 +57,18 @@ namespace XNA_RPG.Map
                 texture = value;
             }
         }
+
+        public bool IsWalkable
+        {
+            get
+            {
+                return isWalkable;
+            }
+            set
+            {
+                isWalkable = value;
+            }
+        }
         #endregion
 
 
