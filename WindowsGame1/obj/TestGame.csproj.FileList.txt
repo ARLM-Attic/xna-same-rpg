@@ -1,0 +1,13 @@
+obj\x86\Debug\ResolveAssemblyReference.cache
+bin\x86\Debug\WindowsGame1.exe
+bin\x86\Debug\WindowsGame1.pdb
+bin\x86\Debug\XNA RPG.dll
+bin\x86\Debug\XNA RPG.pdb
+obj\x86\Debug\WindowsGame1.exe
+obj\x86\Debug\WindowsGame1.pdb
+bin\x86\Debug\Content\Grass1.xnb
+bin\x86\Debug\Content\dirt.xnb
+bin\x86\Debug\Content\dirt.jpg
+bin\x86\Debug\Content\Grass1.jpg
+bin\x86\Debug\Content\blank.xnb
+bin\x86\Debug\Content\testchar.xnb
