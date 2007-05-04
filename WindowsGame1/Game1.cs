@@ -19,7 +19,6 @@ namespace WindowsGame1
     public class Game1 : Microsoft.Xna.Framework.Game
     {
         #region Variables
-        enum Direction { LEFT, RIGHT, UP, DOWN };
 
         GraphicsDeviceManager graphics;
         ContentManager content;
@@ -282,10 +281,12 @@ namespace WindowsGame1
                     if (Keyboard.GetState().IsKeyDown(Keys.Right) == true)
                     {
                         characterPosition.X += walkingSpeed;
+                        direction = Direction.RIGHT;
                     }
                     if (Keyboard.GetState().IsKeyDown(Keys.Left) == true)
                     {
                         characterPosition.X -= walkingSpeed;
+                        direction = Direction.LEFT;
                     }
                     if (characterPosition.X <= 0)
                     {
@@ -303,10 +304,12 @@ namespace WindowsGame1
                     if (Keyboard.GetState().IsKeyDown(Keys.Down) == true)
                     {
                         characterPosition.Y += walkingSpeed;
+                        direction = Direction.DOWN;
                     }
                     if (Keyboard.GetState().IsKeyDown(Keys.Up) == true)
                     {
                         characterPosition.Y -= walkingSpeed;
+                        direction = Direction.UP;
                     }
                     if (characterPosition.Y <= 0)
                     {
@@ -325,10 +328,12 @@ namespace WindowsGame1
                     if (Keyboard.GetState().IsKeyDown(Keys.Right) == true)
                     {
                         characterPosition.X += walkingSpeed;
+                        direction = Direction.RIGHT;
                     }
                     if (Keyboard.GetState().IsKeyDown(Keys.Left) == true)
                     {
                         characterPosition.X -= walkingSpeed;
+                        direction = Direction.LEFT;
                     }
                     if (characterPosition.X <= graphics.GraphicsDevice.Viewport.Width / 2)
                     {
@@ -345,10 +350,12 @@ namespace WindowsGame1
                     if (Keyboard.GetState().IsKeyDown(Keys.Down) == true)
                     {
                         characterPosition.Y += walkingSpeed;
+                        direction = Direction.DOWN;
                     }
                     if (Keyboard.GetState().IsKeyDown(Keys.Up) == true)
                     {
                         characterPosition.Y -= walkingSpeed;
+                        direction = Direction.UP;
                     }
                     if (characterPosition.Y <= graphics.GraphicsDevice.Viewport.Height / 2)
                     {
@@ -468,7 +475,7 @@ namespace WindowsGame1
         public void RenderCharacter()
         {
 
-            spritebatch.Draw(mainCharacter.Texture, new Vector2(characterPosition.X, characterPosition.Y), mainCharacter.GetCurrentFrame(), Color.White);
+            spritebatch.Draw(mainCharacter.Texture, new Vector2(characterPosition.X, characterPosition.Y), mainCharacter.GetCurrentFrame(direction), Color.White);
         }
 
         public Vector2 GetMapPosition(Vector2 screenPosition)

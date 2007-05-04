@@ -98,7 +98,7 @@ namespace XNA_RPG.Character
             get { return this.evade; }
             set { this.evade = value; }
         }
- 
+
         /// <summary>This method gets/sets the magicEvade attribute.</summary>
         public int MEVA
         {
@@ -255,9 +255,27 @@ namespace XNA_RPG.Character
         /*
          * Not implemented yet, for now just returns first frame
          */
-        public Rectangle GetCurrentFrame()
+        public Rectangle GetCurrentFrame(Direction direction)
         {
-            return (new Rectangle(0, 0, 64, 64));
+            switch (direction)
+            {
+                case Direction.UP:
+                    return (new Rectangle(0, 0, 64, 64));
+
+                case Direction.RIGHT:
+                    return (new Rectangle(0, 64, 64, 64));
+
+                case Direction.DOWN:
+                    return (new Rectangle(0, 128, 64, 64));
+
+                case Direction.LEFT:
+                    return (new Rectangle(0, 192, 64, 64));
+                
+                default:
+                    return (new Rectangle(0, 0, 64, 64));
+            }
+
+          
         }
     }
 }

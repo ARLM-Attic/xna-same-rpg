@@ -66,6 +66,10 @@
       <XNAUseContentPipeline>false</XNAUseContentPipeline>
       <Name>Armor</Name>
     </Compile>
+    <Compile Include="Character\Direction.cs">
+      <XNAUseContentPipeline>false</XNAUseContentPipeline>
+      <Name>Direction</Name>
+    </Compile>
     <Compile Include="Character\Combatant.cs">
       <XNAUseContentPipeline>false</XNAUseContentPipeline>
       <Name>Combatant</Name>
