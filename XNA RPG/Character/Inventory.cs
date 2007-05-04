@@ -4,7 +4,7 @@ using System.Collections;
 using System.Text;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace RPGLibrary
+namespace XNA_RPG.Character
 {
     public class Inventory
     {
@@ -76,7 +76,7 @@ namespace RPGLibrary
             this.accessories = new Hashtable();
         }
         #endregion
-        
+
 
         #region Methods
         public bool KeyExists(string s, Hashtable ht)

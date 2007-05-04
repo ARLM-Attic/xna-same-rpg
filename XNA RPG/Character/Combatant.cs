@@ -2,8 +2,13 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Audio;
+using Microsoft.Xna.Framework.Content;
+using Microsoft.Xna.Framework.Input;
+using Microsoft.Xna.Framework.Storage;
 
-namespace RPGLibrary
+namespace XNA_RPG.Character
 {
     public class Combatant
     {
@@ -23,6 +28,8 @@ namespace RPGLibrary
         private int magicPower;
         private int vitality;
         private int speed;
+        private string image;
+        private Texture2D texture;
         // status effects
         private List<StatusEffect> statusEffects;
         public const int MaxLevel = 99;
@@ -132,6 +139,30 @@ namespace RPGLibrary
         {
             get { return this.statusEffects; }
         }
+
+        public string Image
+        {
+            get
+            {
+                return image;
+            }
+            set
+            {
+                image = value;
+            }
+        }
+
+        public Texture2D Texture
+        {
+            get
+            {
+                return texture;
+            }
+            set
+            {
+                texture = value;
+            }
+        }
         #endregion
 
         #region Constructors
@@ -220,5 +251,14 @@ namespace RPGLibrary
         {
         }
         #endregion
+
+        /*
+         * Not implemented yet, for now just returns first frame
+         */
+        public Rectangle GetCurrentFrame()
+        {
+            return (new Rectangle(0, 0, 64, 64));
+        }
     }
 }
+

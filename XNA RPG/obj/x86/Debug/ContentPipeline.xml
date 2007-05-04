@@ -4,30 +4,14 @@
     <Settings>
       <TargetPlatform>Windows</TargetPlatform>
       <BuildConfiguration>Debug</BuildConfiguration>
-      <RootDirectory>C:\Users\Michael Milholen\Documents\Visual Studio 2005\Projects\XNA RPG\</RootDirectory>
-      <IntermediateDirectory>C:\Users\Michael Milholen\Documents\Visual Studio 2005\Projects\XNA RPG\obj\x86\Debug\</IntermediateDirectory>
-      <OutputDirectory>C:\Users\Michael Milholen\Documents\Visual Studio 2005\Projects\XNA RPG\bin\x86\Debug\</OutputDirectory>
+      <RootDirectory>C:\Users\Daniel\Documents\Visual Studio 2005\Projects\XNA RPG\XNA RPG\</RootDirectory>
+      <IntermediateDirectory>C:\Users\Daniel\Documents\Visual Studio 2005\Projects\XNA RPG\XNA RPG\obj\x86\Debug\</IntermediateDirectory>
+      <OutputDirectory>C:\Users\Daniel\Documents\Visual Studio 2005\Projects\XNA RPG\XNA RPG\bin\x86\Debug\</OutputDirectory>
     </Settings>
     <Assemblies>
       <Assembly>
-        <Key>C:\Program Files\Microsoft XNA\XNA Game Studio Express\v1.0\References\Windows\x86\Microsoft.Xna.Framework.Content.Pipeline.XImporter.dll</Key>
-        <Value>2006-11-18T17:27:42-05:00</Value>
-      </Assembly>
-      <Assembly>
-        <Key>C:\Program Files\Microsoft XNA\XNA Game Studio Express\v1.0\References\Windows\x86\Microsoft.Xna.Framework.Content.Pipeline.TextureImporter.dll</Key>
-        <Value>2006-11-18T17:28:34-05:00</Value>
-      </Assembly>
-      <Assembly>
-        <Key>C:\Program Files\Microsoft XNA\XNA Game Studio Express\v1.0\References\Windows\x86\Microsoft.Xna.Framework.Content.Pipeline.FBXImporter.dll</Key>
-        <Value>2006-11-18T17:28:18-05:00</Value>
-      </Assembly>
-      <Assembly>
-        <Key>C:\Program Files\Microsoft XNA\XNA Game Studio Express\v1.0\References\Windows\x86\Microsoft.Xna.Framework.Content.Pipeline.EffectImporter.dll</Key>
-        <Value>2006-11-18T17:27:26-05:00</Value>
-      </Assembly>
-      <Assembly>
         <Key>C:\Windows\assembly\GAC_32\Microsoft.Xna.Framework.Content.Pipeline\1.0.0.0__6d5c3888ef60e27d\Microsoft.Xna.Framework.Content.Pipeline.dll</Key>
-        <Value>2007-02-07T11:57:05.190376-05:00</Value>
+        <Value>2007-04-27T19:47:48.3853125-04:00</Value>
       </Assembly>
     </Assemblies>
   </Asset>
