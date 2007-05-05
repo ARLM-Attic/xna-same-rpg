@@ -2,40 +2,58 @@
 <XnaContent xmlns:Pipeline="Microsoft.Xna.Framework.Content.Pipeline">
   <Asset Type="Pipeline:BuildItemCollection">
     <Item>
-      <Source>Content\blank.PNG</Source>
-      <Name>Content\blank</Name>
+      <Source>Content\System\blank.PNG</Source>
+      <Name>Content\System\blank</Name>
       <Importer>TextureImporter</Importer>
       <Processor>SpriteTextureProcessor</Processor>
       <Options>None</Options>
-      <Output>bin\x86\Debug\Content\blank.xnb</Output>
+      <Output>bin\x86\Debug\Content\System\blank.xnb</Output>
       <Time>2007-05-03T15:11:38-04:00</Time>
     </Item>
     <Item>
-      <Source>Content\dirt.jpg</Source>
-      <Name>Content\dirt</Name>
+      <Source>Content\Map\Chipsets\dirt.jpg</Source>
+      <Name>Content\Map\Chipsets\dirt</Name>
       <Importer>TextureImporter</Importer>
       <Processor>SpriteTextureProcessor</Processor>
       <Options>None</Options>
-      <Output>bin\x86\Debug\Content\dirt.xnb</Output>
+      <Output>bin\x86\Debug\Content\Map\Chipsets\dirt.xnb</Output>
       <Time>2007-05-02T20:17:28-04:00</Time>
     </Item>
     <Item>
-      <Source>Content\Grass1.jpg</Source>
-      <Name>Content\Grass1</Name>
+      <Source>Content\Map\Chipsets\Grass1.jpg</Source>
+      <Name>Content\Map\Chipsets\Grass1</Name>
       <Importer>TextureImporter</Importer>
       <Processor>SpriteTextureProcessor</Processor>
       <Options>None</Options>
-      <Output>bin\x86\Debug\Content\Grass1.xnb</Output>
+      <Output>bin\x86\Debug\Content\Map\Chipsets\Grass1.xnb</Output>
       <Time>2007-05-02T18:40:08-04:00</Time>
     </Item>
     <Item>
-      <Source>Content\testchar.png</Source>
-      <Name>Content\testchar</Name>
+      <Source>Content\Menu\MenuBackground.png</Source>
+      <Name>Content\Menu\MenuBackground</Name>
       <Importer>TextureImporter</Importer>
       <Processor>SpriteTextureProcessor</Processor>
       <Options>None</Options>
-      <Output>bin\x86\Debug\Content\testchar.xnb</Output>
+      <Output>bin\x86\Debug\Content\Menu\MenuBackground.xnb</Output>
+      <Time>2007-05-05T18:59:35.5805525-04:00</Time>
+    </Item>
+    <Item>
+      <Source>Content\Characters\Walking\testchar.png</Source>
+      <Name>Content\Characters\Walking\testchar</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>SpriteTextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>bin\x86\Debug\Content\Characters\Walking\testchar.xnb</Output>
       <Time>2007-05-05T15:46:11.2232725-04:00</Time>
+    </Item>
+    <Item>
+      <Source>Content\Fonts\Arial17.spritefont</Source>
+      <Name>Content\Fonts\Arial17</Name>
+      <Importer>FontDescriptionImporter</Importer>
+      <Processor>FontDescriptionProcessor</Processor>
+      <Options>None</Options>
+      <Output>bin\x86\Debug\Content\Fonts\Arial17.xnb</Output>
+      <Time>2007-05-05T19:29:44.048159-04:00</Time>
     </Item>
     <Settings>
       <TargetPlatform>Windows</TargetPlatform>

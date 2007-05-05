@@ -9,6 +9,7 @@ using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Storage;
 using XNA_RPG.Map;
 using XNA_RPG.Character;
+using XNA_RPG.Menu;
 #endregion
 
 namespace WindowsGame1
@@ -36,11 +37,15 @@ namespace WindowsGame1
         Vector2 characterPosition;
         float walkingSpeed;
         Direction direction;
-
-
         Vector2 oldCharPos;
         Vector2 oldFocus;
 
+        //menu
+        bool menuActive;
+        bool menuPressed;
+        Menu menu;
+
+        
 
         #endregion
 
@@ -65,6 +70,7 @@ namespace WindowsGame1
             InitializeChipsets();
             InitializeMaps();
             InitializeCharacter();
+            InitializeMenu();
 
             screenSize.X = 12;
             screenSize.Y = 12;
@@ -76,6 +82,9 @@ namespace WindowsGame1
             characterPosition = new Vector2(0, 0);
             walkingSpeed = 5.0f;
 
+            menuActive = false;
+            menuPressed = false;
+
 
 
             base.Initialize();
@@ -86,11 +95,11 @@ namespace WindowsGame1
 
             //Create Chipsets
             chipset = new Chipset(36, 36);
-            chipset.AddTile("Content\\Grass1", true);
-            chipset.AddTile("Content\\dirt", false);
+            chipset.AddTile("Content\\Map\\Chipsets\\Grass1", true);
+            chipset.AddTile("Content\\Map\\Chipsets\\dirt", false);
 
             systemchipset = new Chipset(36, 36);
-            systemchipset.AddTile("Content\\blank", false);
+            systemchipset.AddTile("Content\\System\\blank", false);
 
 
 
@@ -160,7 +169,11 @@ namespace WindowsGame1
             direction = Direction.DOWN;
         }
 
-
+        public void InitializeMenu()
+        {
+            menu = new Menu();
+            menu.MenuFont = content.Load<SpriteFont>("Content\\Fonts\\Arial17");
+        }
 
         /// <summary>
         /// Load your graphics content.  If loadAllContent is true, you should
@@ -182,7 +195,8 @@ namespace WindowsGame1
                     tile.Texture = content.Load<Texture2D>(tile.AssetName);
                 }
 
-                mainCharacter.Texture = content.Load<Texture2D>("Content\\testchar");
+                mainCharacter.Texture = content.Load<Texture2D>("Content\\Characters\\Walking\\testchar");
+                menu.Texture = content.Load<Texture2D>("Content\\Menu\\MenuBackground");
             }
 
             // TODO: Load any ResourceManagementMode.Manual content
@@ -215,236 +229,259 @@ namespace WindowsGame1
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Update(GameTime gameTime)
         {
-            if (characterPosition != null)
-                oldCharPos = characterPosition;
-            if (focus != null)
-                oldFocus = focus;
-
-            // Allows the game to exit
-            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)
-                this.Exit();
-
-            #region Basic Map Movement
-
-            if (Keyboard.GetState().IsKeyDown(Keys.Up) == true
-                && characterPosition.Y == graphics.GraphicsDevice.Viewport.Height / 2)
-            {
-                focus.Y -= walkingSpeed / 100.0f;
-                direction = Direction.UP;
-            }
-
-            if (Keyboard.GetState().IsKeyDown(Keys.Down) == true
-                && characterPosition.Y == graphics.GraphicsDevice.Viewport.Height / 2)
-            {
-                focus.Y += walkingSpeed / 100.0f;
-                direction = Direction.DOWN;
-            }
-
-            if (Keyboard.GetState().IsKeyDown(Keys.Right) == true
-                && characterPosition.X == graphics.GraphicsDevice.Viewport.Width / 2)
-            {
-                focus.X += walkingSpeed / 100.0f;
-                direction = Direction.RIGHT;
-            }
-
-            if (Keyboard.GetState().IsKeyDown(Keys.Left) == true
-                && characterPosition.X == graphics.GraphicsDevice.Viewport.Width / 2)
-            {
-                focus.X -= walkingSpeed / 100.0f;
-                direction = Direction.LEFT;
-            }
-            #endregion
-
-            #region Map Boundary Checks
-            if (focus.X >= map.Width - screenSize.X)
-                focus.X = map.Width - screenSize.X;
-
-            if (focus.X < 0)
-                focus.X = 0;
-
-            if (focus.Y >= map.Height - screenSize.Y)
-                focus.Y = map.Height - screenSize.Y;
-
-            if (focus.Y < 0)
-                focus.Y = 0;
-            #endregion
-
-            #region Character Movement Checks
-
-            if (focus.X <= 0 || focus.X >= map.Width - screenSize.X || focus.Y <= 0 || focus.Y >= map.Height - screenSize.Y)
+            #region Menu Logic
+            if (Keyboard.GetState().IsKeyDown(Keys.D) == true)
             {
 
-                #region Map and character at top left of map
-                if (focus.X <= 0)
+                if (menuPressed == false)
                 {
-                    if (Keyboard.GetState().IsKeyDown(Keys.Right) == true)
-                    {
-                        characterPosition.X += walkingSpeed;
-                        direction = Direction.RIGHT;
-                    }
-                    if (Keyboard.GetState().IsKeyDown(Keys.Left) == true)
-                    {
-                        characterPosition.X -= walkingSpeed;
-                        direction = Direction.LEFT;
-                    }
-                    if (characterPosition.X <= 0)
-                    {
-                        characterPosition.X = 0;
-                    }
-                    if (characterPosition.X >= graphics.GraphicsDevice.Viewport.Width / 2)
-                    {
-                        characterPosition.X = graphics.GraphicsDevice.Viewport.Width / 2;
-                    }
-
+                    if (menuActive == true)
+                        menuActive = false;
+                    else
+                        menuActive = true;
                 }
 
-                if (focus.Y <= 0)
-                {
-                    if (Keyboard.GetState().IsKeyDown(Keys.Down) == true)
-                    {
-                        characterPosition.Y += walkingSpeed;
-                        direction = Direction.DOWN;
-                    }
-                    if (Keyboard.GetState().IsKeyDown(Keys.Up) == true)
-                    {
-                        characterPosition.Y -= walkingSpeed;
-                        direction = Direction.UP;
-                    }
-                    if (characterPosition.Y <= 0)
-                    {
-                        characterPosition.Y = 0;
-                    }
-                    if (characterPosition.Y >= graphics.GraphicsDevice.Viewport.Height / 2)
-                    {
-                        characterPosition.Y = graphics.GraphicsDevice.Viewport.Height / 2;
-                    }
-                }
-                #endregion
-
-                #region Map and character at bottom right of map
-                if (focus.X >= map.Width - screenSize.X)
-                {
-                    if (Keyboard.GetState().IsKeyDown(Keys.Right) == true)
-                    {
-                        characterPosition.X += walkingSpeed;
-                        direction = Direction.RIGHT;
-                    }
-                    if (Keyboard.GetState().IsKeyDown(Keys.Left) == true)
-                    {
-                        characterPosition.X -= walkingSpeed;
-                        direction = Direction.LEFT;
-                    }
-                    if (characterPosition.X <= graphics.GraphicsDevice.Viewport.Width / 2)
-                    {
-                        characterPosition.X = graphics.GraphicsDevice.Viewport.Width / 2;
-                    }
-                    if (characterPosition.X >= graphics.GraphicsDevice.Viewport.Width)
-                    {
-                        characterPosition.X = graphics.GraphicsDevice.Viewport.Width;
-                    }
-                }
-
-                if (focus.Y >= map.Height - screenSize.Y)
-                {
-                    if (Keyboard.GetState().IsKeyDown(Keys.Down) == true)
-                    {
-                        characterPosition.Y += walkingSpeed;
-                        direction = Direction.DOWN;
-                    }
-                    if (Keyboard.GetState().IsKeyDown(Keys.Up) == true)
-                    {
-                        characterPosition.Y -= walkingSpeed;
-                        direction = Direction.UP;
-                    }
-                    if (characterPosition.Y <= graphics.GraphicsDevice.Viewport.Height / 2)
-                    {
-                        characterPosition.Y = graphics.GraphicsDevice.Viewport.Height / 2;
-                    }
-                    if (characterPosition.Y >= graphics.GraphicsDevice.Viewport.Height)
-                    {
-                        characterPosition.Y = graphics.GraphicsDevice.Viewport.Height;
-                    }
-                }
-                #endregion
-
-                #region Making sure character stays on the screen
-
-                if (characterPosition.X >= (graphics.GraphicsDevice.Viewport.Width) - ChipsetTile.WIDTH)
-                {
-                    characterPosition.X = (graphics.GraphicsDevice.Viewport.Width) - ChipsetTile.WIDTH;
-                }
-                if (characterPosition.Y >= (graphics.GraphicsDevice.Viewport.Height) - ChipsetTile.HEIGHT)
-                {
-                    characterPosition.Y = (graphics.GraphicsDevice.Viewport.Height) - ChipsetTile.HEIGHT;
-                }
-                #endregion
-
+                menuPressed = true;
             }
-
             else
             {
-                characterPosition.X = graphics.GraphicsDevice.Viewport.Width / 2;
-                characterPosition.Y = graphics.GraphicsDevice.Viewport.Height / 2;
+                menuPressed = false;
             }
             #endregion
 
-            #region CollisionChecking
-
-            bool collision;
-
-            //4 tile checks
-            Vector2 charac = GetMapPosition(characterPosition);
-
-            Vector2 tile1 = new Vector2((int)charac.X, (int)charac.Y);
-            Vector2 tile2 = new Vector2(tile1.X + 1, tile1.Y);
-            Vector2 tile3 = new Vector2(tile1.X, tile1.Y + 1);
-            Vector2 tile4 = new Vector2(tile1.X + 1, tile1.Y + 1);
-
-            try
+            if (menuActive == false)
             {
-                if (chipset.Tiles[map.BottomLayer[(int)tile1.X, (int)tile1.Y]].IsWalkable == true
-                    && chipset.Tiles[map.BottomLayer[(int)tile2.X, (int)tile2.Y]].IsWalkable == true
-                    && chipset.Tiles[map.BottomLayer[(int)tile3.X, (int)tile3.Y]].IsWalkable == true
-                    && chipset.Tiles[map.BottomLayer[(int)tile4.X, (int)tile4.Y]].IsWalkable == true)
+                #region If Menu Isnt Pressed, most Game Logic
+
+                if (characterPosition != null)
+                    oldCharPos = characterPosition;
+                if (focus != null)
+                    oldFocus = focus;
+
+                // Allows the game to exit
+                if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)
+                    this.Exit();
+
+                #region Basic Map Movement
+
+                if (Keyboard.GetState().IsKeyDown(Keys.Up) == true
+                    && characterPosition.Y == graphics.GraphicsDevice.Viewport.Height / 2)
                 {
-                    collision = false;
+                    focus.Y -= walkingSpeed / 100.0f;
+                    direction = Direction.UP;
+                }
+
+                if (Keyboard.GetState().IsKeyDown(Keys.Down) == true
+                    && characterPosition.Y == graphics.GraphicsDevice.Viewport.Height / 2)
+                {
+                    focus.Y += walkingSpeed / 100.0f;
+                    direction = Direction.DOWN;
+                }
+
+                if (Keyboard.GetState().IsKeyDown(Keys.Right) == true
+                    && characterPosition.X == graphics.GraphicsDevice.Viewport.Width / 2)
+                {
+                    focus.X += walkingSpeed / 100.0f;
+                    direction = Direction.RIGHT;
+                }
+
+                if (Keyboard.GetState().IsKeyDown(Keys.Left) == true
+                    && characterPosition.X == graphics.GraphicsDevice.Viewport.Width / 2)
+                {
+                    focus.X -= walkingSpeed / 100.0f;
+                    direction = Direction.LEFT;
+                }
+                #endregion
+
+                #region Map Boundary Checks
+                if (focus.X >= map.Width - screenSize.X)
+                    focus.X = map.Width - screenSize.X;
+
+                if (focus.X < 0)
+                    focus.X = 0;
+
+                if (focus.Y >= map.Height - screenSize.Y)
+                    focus.Y = map.Height - screenSize.Y;
+
+                if (focus.Y < 0)
+                    focus.Y = 0;
+                #endregion
+
+                #region Character Movement Checks
+
+                if (focus.X <= 0 || focus.X >= map.Width - screenSize.X || focus.Y <= 0 || focus.Y >= map.Height - screenSize.Y)
+                {
+
+                    #region Map and character at top left of map
+                    if (focus.X <= 0)
+                    {
+                        if (Keyboard.GetState().IsKeyDown(Keys.Right) == true)
+                        {
+                            characterPosition.X += walkingSpeed;
+                            direction = Direction.RIGHT;
+                        }
+                        if (Keyboard.GetState().IsKeyDown(Keys.Left) == true)
+                        {
+                            characterPosition.X -= walkingSpeed;
+                            direction = Direction.LEFT;
+                        }
+                        if (characterPosition.X <= 0)
+                        {
+                            characterPosition.X = 0;
+                        }
+                        if (characterPosition.X >= graphics.GraphicsDevice.Viewport.Width / 2)
+                        {
+                            characterPosition.X = graphics.GraphicsDevice.Viewport.Width / 2;
+                        }
+
+                    }
+
+                    if (focus.Y <= 0)
+                    {
+                        if (Keyboard.GetState().IsKeyDown(Keys.Down) == true)
+                        {
+                            characterPosition.Y += walkingSpeed;
+                            direction = Direction.DOWN;
+                        }
+                        if (Keyboard.GetState().IsKeyDown(Keys.Up) == true)
+                        {
+                            characterPosition.Y -= walkingSpeed;
+                            direction = Direction.UP;
+                        }
+                        if (characterPosition.Y <= 0)
+                        {
+                            characterPosition.Y = 0;
+                        }
+                        if (characterPosition.Y >= graphics.GraphicsDevice.Viewport.Height / 2)
+                        {
+                            characterPosition.Y = graphics.GraphicsDevice.Viewport.Height / 2;
+                        }
+                    }
+                    #endregion
+
+                    #region Map and character at bottom right of map
+                    if (focus.X >= map.Width - screenSize.X)
+                    {
+                        if (Keyboard.GetState().IsKeyDown(Keys.Right) == true)
+                        {
+                            characterPosition.X += walkingSpeed;
+                            direction = Direction.RIGHT;
+                        }
+                        if (Keyboard.GetState().IsKeyDown(Keys.Left) == true)
+                        {
+                            characterPosition.X -= walkingSpeed;
+                            direction = Direction.LEFT;
+                        }
+                        if (characterPosition.X <= graphics.GraphicsDevice.Viewport.Width / 2)
+                        {
+                            characterPosition.X = graphics.GraphicsDevice.Viewport.Width / 2;
+                        }
+                        if (characterPosition.X >= graphics.GraphicsDevice.Viewport.Width)
+                        {
+                            characterPosition.X = graphics.GraphicsDevice.Viewport.Width;
+                        }
+                    }
+
+                    if (focus.Y >= map.Height - screenSize.Y)
+                    {
+                        if (Keyboard.GetState().IsKeyDown(Keys.Down) == true)
+                        {
+                            characterPosition.Y += walkingSpeed;
+                            direction = Direction.DOWN;
+                        }
+                        if (Keyboard.GetState().IsKeyDown(Keys.Up) == true)
+                        {
+                            characterPosition.Y -= walkingSpeed;
+                            direction = Direction.UP;
+                        }
+                        if (characterPosition.Y <= graphics.GraphicsDevice.Viewport.Height / 2)
+                        {
+                            characterPosition.Y = graphics.GraphicsDevice.Viewport.Height / 2;
+                        }
+                        if (characterPosition.Y >= graphics.GraphicsDevice.Viewport.Height)
+                        {
+                            characterPosition.Y = graphics.GraphicsDevice.Viewport.Height;
+                        }
+                    }
+                    #endregion
+
+                    #region Making sure character stays on the screen
+
+                    if (characterPosition.X >= (graphics.GraphicsDevice.Viewport.Width) - ChipsetTile.WIDTH)
+                    {
+                        characterPosition.X = (graphics.GraphicsDevice.Viewport.Width) - ChipsetTile.WIDTH;
+                    }
+                    if (characterPosition.Y >= (graphics.GraphicsDevice.Viewport.Height) - ChipsetTile.HEIGHT)
+                    {
+                        characterPosition.Y = (graphics.GraphicsDevice.Viewport.Height) - ChipsetTile.HEIGHT;
+                    }
+                    #endregion
+
+                }
+
+                else
+                {
+                    characterPosition.X = graphics.GraphicsDevice.Viewport.Width / 2;
+                    characterPosition.Y = graphics.GraphicsDevice.Viewport.Height / 2;
+                }
+                #endregion
+
+                #region CollisionChecking
+
+                bool collision;
+
+                //4 tile checks
+                Vector2 charac = GetMapPosition(characterPosition);
+
+                Vector2 tile1 = new Vector2((int)charac.X, (int)charac.Y);
+                Vector2 tile2 = new Vector2(tile1.X + 1, tile1.Y);
+                Vector2 tile3 = new Vector2(tile1.X, tile1.Y + 1);
+                Vector2 tile4 = new Vector2(tile1.X + 1, tile1.Y + 1);
+
+                try
+                {
+                    if (chipset.Tiles[map.BottomLayer[(int)tile1.X, (int)tile1.Y]].IsWalkable == true
+                        && chipset.Tiles[map.BottomLayer[(int)tile2.X, (int)tile2.Y]].IsWalkable == true
+                        && chipset.Tiles[map.BottomLayer[(int)tile3.X, (int)tile3.Y]].IsWalkable == true
+                        && chipset.Tiles[map.BottomLayer[(int)tile4.X, (int)tile4.Y]].IsWalkable == true)
+                    {
+                        collision = false;
+                    }
+                    else
+                    {
+                        collision = true;
+                    }
+                }
+                catch (Exception e)
+                {
+                    collision = true;
+                    Console.WriteLine("caught exception");
+                }
+
+                if (collision == true)
+                {
+                    characterPosition = oldCharPos;
+                    focus = oldFocus;
+                }
+                #endregion
+
+                #region Moving Check
+
+                if (Keyboard.GetState().IsKeyDown(Keys.Up) == true ||
+                   Keyboard.GetState().IsKeyDown(Keys.Down) == true ||
+                   Keyboard.GetState().IsKeyDown(Keys.Left) == true ||
+                   Keyboard.GetState().IsKeyDown(Keys.Right) == true)
+                {
+                    mainCharacter.IsMoving = true;
                 }
                 else
                 {
-                    collision = true;
+                    mainCharacter.IsMoving = false;
                 }
+
+                #endregion
+                #endregion
             }
-            catch (Exception e)
-            {
-                collision = true;
-                Console.WriteLine("caught exception");
-            }
-            
-
-
-            if (collision == true)
-            {
-                characterPosition = oldCharPos;
-                focus = oldFocus;
-            }
-            #endregion
-
-            #region Moving Check
-
-            if (Keyboard.GetState().IsKeyDown(Keys.Up) == true ||
-               Keyboard.GetState().IsKeyDown(Keys.Down) == true ||
-               Keyboard.GetState().IsKeyDown(Keys.Left) == true ||
-               Keyboard.GetState().IsKeyDown(Keys.Right) == true)
-            {
-                mainCharacter.IsMoving = true;
-            }
-            else
-            {
-                mainCharacter.IsMoving = false;
-            }
-
-            #endregion
-
             base.Update(gameTime);
         }
 
@@ -462,7 +499,14 @@ namespace WindowsGame1
             RenderMap();
             RenderCharacter();
 
+            if (menuActive == true)
+            {
+                RenderMenu();
+            }
+
             spritebatch.End();
+
+           
 
 
             base.Draw(gameTime);
@@ -490,8 +534,17 @@ namespace WindowsGame1
         public void RenderCharacter()
         {
 
-            spritebatch.Draw(mainCharacter.Texture, new Vector2(characterPosition.X, characterPosition.Y), 
+            spritebatch.Draw(mainCharacter.Texture, new Vector2(characterPosition.X, characterPosition.Y),
                 mainCharacter.GetCurrentFrame(direction), Color.White);
+        }
+
+        public void RenderMenu()
+        {
+            spritebatch.Draw(menu.Texture, 
+                new Rectangle(0, 0, graphics.GraphicsDevice.Viewport.Width, 
+                graphics.GraphicsDevice.Viewport.Height), Color.White);            
+
+            menu.Draw(spritebatch, TargetElapsedTime);
         }
 
         public Vector2 GetMapPosition(Vector2 screenPosition)
