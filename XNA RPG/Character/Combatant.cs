@@ -33,6 +33,9 @@ namespace XNA_RPG.Character
         // status effects
         private List<StatusEffect> statusEffects;
         public const int MaxLevel = 99;
+        // graphics
+        private int frameCount;
+        private bool isMoving;
         #endregion
 
         #region Properties
@@ -163,6 +166,30 @@ namespace XNA_RPG.Character
                 texture = value;
             }
         }
+
+        public int FrameCount
+        {
+            get
+            {
+                return frameCount;
+            }
+            set
+            {
+                frameCount = value;
+            }
+        }
+
+        public bool IsMoving
+        {
+            get
+            {
+                return isMoving;
+            }
+            set
+            {
+                isMoving = value;
+            }
+        }
         #endregion
 
         #region Constructors
@@ -172,6 +199,8 @@ namespace XNA_RPG.Character
         public Combatant()
         {
             this.statusEffects = new List<StatusEffect>();
+            frameCount = 0;
+            isMoving = false;
         }
         #endregion
 
@@ -257,22 +286,32 @@ namespace XNA_RPG.Character
          */
         public Rectangle GetCurrentFrame(Direction direction)
         {
+            if (isMoving == true)
+            {
+                frameCount++;
+            }
+
+            if (frameCount > 29)
+            {
+                frameCount = 0;
+            }
             switch (direction)
             {
                 case Direction.UP:
-                    return (new Rectangle(0, 0, 64, 64));
+                    return (new Rectangle(64 * (frameCount / 10), 0, 64, 64));
 
                 case Direction.RIGHT:
-                    return (new Rectangle(0, 64, 64, 64));
+                    return (new Rectangle(64 * (frameCount / 10), 64, 64, 64));
 
                 case Direction.DOWN:
-                    return (new Rectangle(0, 128, 64, 64));
+                    return (new Rectangle(64 * (frameCount / 10), 128, 64, 64));
 
                 case Direction.LEFT:
-                    return (new Rectangle(0, 192, 64, 64));
+                    return (new Rectangle(64 * (frameCount / 10), 192, 64, 64));
                 
                 default:
-                    return (new Rectangle(0, 0, 64, 64));
+                    return (new Rectangle(64 * (frameCount / 10), 0, 64, 64));
+
             }
 
           

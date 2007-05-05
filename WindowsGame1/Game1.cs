@@ -231,7 +231,6 @@ namespace WindowsGame1
             {
                 focus.Y -= walkingSpeed / 100.0f;
                 direction = Direction.UP;
-
             }
 
             if (Keyboard.GetState().IsKeyDown(Keys.Down) == true
@@ -430,6 +429,22 @@ namespace WindowsGame1
             }
             #endregion
 
+            #region Moving Check
+
+            if (Keyboard.GetState().IsKeyDown(Keys.Up) == true ||
+               Keyboard.GetState().IsKeyDown(Keys.Down) == true ||
+               Keyboard.GetState().IsKeyDown(Keys.Left) == true ||
+               Keyboard.GetState().IsKeyDown(Keys.Right) == true)
+            {
+                mainCharacter.IsMoving = true;
+            }
+            else
+            {
+                mainCharacter.IsMoving = false;
+            }
+
+            #endregion
+
             base.Update(gameTime);
         }
 
@@ -475,7 +490,8 @@ namespace WindowsGame1
         public void RenderCharacter()
         {
 
-            spritebatch.Draw(mainCharacter.Texture, new Vector2(characterPosition.X, characterPosition.Y), mainCharacter.GetCurrentFrame(direction), Color.White);
+            spritebatch.Draw(mainCharacter.Texture, new Vector2(characterPosition.X, characterPosition.Y), 
+                mainCharacter.GetCurrentFrame(direction), Color.White);
         }
 
         public Vector2 GetMapPosition(Vector2 screenPosition)
