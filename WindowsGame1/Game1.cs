@@ -1,4 +1,3 @@
-#region Using Statements
 using System;
 using System.Collections.Generic;
 using Microsoft.Xna.Framework;
@@ -7,10 +6,9 @@ using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Storage;
-using XNA_RPG.Map;
+using XNA_RPG.Mapping;
 using XNA_RPG.Character;
 using XNA_RPG.Menu;
-#endregion
 
 namespace WindowsGame1
 {
@@ -20,7 +18,6 @@ namespace WindowsGame1
     public class Game1 : Microsoft.Xna.Framework.Game
     {
         #region Variables
-
         GraphicsDeviceManager graphics;
         ContentManager content;
 
@@ -44,19 +41,13 @@ namespace WindowsGame1
         bool menuActive;
         bool menuPressed;
         Menu menu;
-
-        
-
         #endregion
-
 
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
             content = new ContentManager(Services);
-
         }
-
 
         /// <summary>
         /// Allows the game to perform any initialization it needs to before starting to run.
@@ -66,7 +57,6 @@ namespace WindowsGame1
         /// </summary>
         protected override void Initialize()
         {
-
             InitializeChipsets();
             InitializeMaps();
             InitializeCharacter();
@@ -74,8 +64,8 @@ namespace WindowsGame1
 
             screenSize.X = 12;
             screenSize.Y = 12;
-            graphics.PreferredBackBufferWidth = (int)screenSize.X * ChipsetTile.WIDTH;
-            graphics.PreferredBackBufferHeight = (int)screenSize.Y * ChipsetTile.HEIGHT;
+            graphics.PreferredBackBufferWidth = (int)screenSize.X * ChipsetTile.Width;
+            graphics.PreferredBackBufferHeight = (int)screenSize.Y * ChipsetTile.Height;
 
             spritebatch = new SpriteBatch(graphics.GraphicsDevice);
             focus = new Vector2(0, 0);
@@ -85,14 +75,11 @@ namespace WindowsGame1
             menuActive = false;
             menuPressed = false;
 
-
-
             base.Initialize();
         }
 
         public void InitializeChipsets()
         {
-
             //Create Chipsets
             chipset = new Chipset(36, 36);
             chipset.AddTile("Content\\Map\\Chipsets\\Grass1", true);
@@ -100,9 +87,6 @@ namespace WindowsGame1
 
             systemchipset = new Chipset(36, 36);
             systemchipset.AddTile("Content\\System\\blank", false);
-
-
-
         }
 
         public void InitializeMaps()
@@ -202,7 +186,6 @@ namespace WindowsGame1
             // TODO: Load any ResourceManagementMode.Manual content
         }
 
-
         /// <summary>
         /// Unload your graphics content.  If unloadAllContent is true, you should
         /// unload content from both ResourceManagementMode pools.  Otherwise, just
@@ -220,7 +203,6 @@ namespace WindowsGame1
 
             // TODO: Unload any ResourceManagementMode.Manual content
         }
-
 
         /// <summary>
         /// Allows the game to run logic such as updating the world,
@@ -407,13 +389,13 @@ namespace WindowsGame1
 
                     #region Making sure character stays on the screen
 
-                    if (characterPosition.X >= (graphics.GraphicsDevice.Viewport.Width) - ChipsetTile.WIDTH)
+                    if (characterPosition.X >= (graphics.GraphicsDevice.Viewport.Width) - ChipsetTile.Width)
                     {
-                        characterPosition.X = (graphics.GraphicsDevice.Viewport.Width) - ChipsetTile.WIDTH;
+                        characterPosition.X = (graphics.GraphicsDevice.Viewport.Width) - ChipsetTile.Width;
                     }
-                    if (characterPosition.Y >= (graphics.GraphicsDevice.Viewport.Height) - ChipsetTile.HEIGHT)
+                    if (characterPosition.Y >= (graphics.GraphicsDevice.Viewport.Height) - ChipsetTile.Height)
                     {
-                        characterPosition.Y = (graphics.GraphicsDevice.Viewport.Height) - ChipsetTile.HEIGHT;
+                        characterPosition.Y = (graphics.GraphicsDevice.Viewport.Height) - ChipsetTile.Height;
                     }
                     #endregion
 
@@ -455,7 +437,7 @@ namespace WindowsGame1
                 catch (Exception e)
                 {
                     collision = true;
-                    Console.WriteLine("caught exception");
+                    Console.WriteLine("caught exception" + e.ToString());
                 }
 
                 if (collision == true)
@@ -485,15 +467,12 @@ namespace WindowsGame1
             base.Update(gameTime);
         }
 
-
         /// <summary>
         /// This is called when the game should draw itself.
         /// </summary>
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
         {
-
-
             spritebatch.Begin();
 
             RenderMap();
@@ -506,26 +485,22 @@ namespace WindowsGame1
 
             spritebatch.End();
 
-           
-
-
             base.Draw(gameTime);
         }
 
         public void RenderMap()
         {
-
             for (int i = (int)focus.X; i < focus.X + screenSize.X + 1; i++)
             {
                 for (int j = (int)focus.Y; j < focus.Y + screenSize.Y + 1; j++)
                 {
                     if (i >= 0 && i < map.Width && j >= 0 && j < map.Height)
                     {
-                        spritebatch.Draw(chipset.Tiles[map.BottomLayer[i, j]].Texture, new Vector2((i - focus.X) * ChipsetTile.WIDTH, (j - focus.Y) * ChipsetTile.HEIGHT), Color.White);
+                        spritebatch.Draw(chipset.Tiles[map.BottomLayer[i, j]].Texture, new Vector2((i - focus.X) * ChipsetTile.Width, (j - focus.Y) * ChipsetTile.Height), Color.White);
                     }
                     else
                     {
-                        spritebatch.Draw(systemchipset.Tiles[0].Texture, new Vector2((i - focus.X) * ChipsetTile.WIDTH, (j - focus.Y) * ChipsetTile.HEIGHT), Color.White);
+                        spritebatch.Draw(systemchipset.Tiles[0].Texture, new Vector2((i - focus.X) * ChipsetTile.Width, (j - focus.Y) * ChipsetTile.Height), Color.White);
                     }
                 }
             }
@@ -533,7 +508,6 @@ namespace WindowsGame1
 
         public void RenderCharacter()
         {
-
             spritebatch.Draw(mainCharacter.Texture, new Vector2(characterPosition.X, characterPosition.Y),
                 mainCharacter.GetCurrentFrame(direction), Color.White);
         }
@@ -551,8 +525,8 @@ namespace WindowsGame1
         {
             Vector2 mapPosition = new Vector2();
 
-            mapPosition.X = focus.X + (screenPosition.X / ChipsetTile.WIDTH);
-            mapPosition.Y = focus.Y + (screenPosition.Y / ChipsetTile.HEIGHT);
+            mapPosition.X = focus.X + (screenPosition.X / ChipsetTile.Width);
+            mapPosition.Y = focus.Y + (screenPosition.Y / ChipsetTile.Height);
 
             return mapPosition;
         }
