@@ -1,5 +1,5 @@
 obj\x86\Debug\ResolveAssemblyReference.cache
-bin\x86\Debug\XNA RPG.dll
-bin\x86\Debug\XNA RPG.pdb
 obj\x86\Debug\XNA RPG.dll
 obj\x86\Debug\XNA RPG.pdb
+bin\x86\Debug\XNA RPG.dll
+bin\x86\Debug\XNA RPG.pdb
