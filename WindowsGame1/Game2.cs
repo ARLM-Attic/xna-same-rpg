@@ -10,6 +10,7 @@ using XNA_RPG.Mapping;
 using XNA_RPG.Character;
 using XNA_RPG.Menu;
 using XNA_RPG.XML;
+using WindowsGame1.Submenus;
 
 namespace WindowsGame2
 {
@@ -28,7 +29,15 @@ namespace WindowsGame2
         Vector2 screenSize;
         Vector2 focus;
         Vector2 oldFocus;
+
+        //Party
+        Combatant char1;
+        Combatant char2;
+        Combatant char3;
+
+        //Menu
         Menu menu;
+        Main submain;
 
         private XMLAgent xmlAgent;
         private GameStates gameState;
@@ -148,11 +157,54 @@ namespace WindowsGame2
         {
             menu = new Menu();
             menu.MenuFont = content.Load<SpriteFont>("Content\\Fonts\\Arial17");
+
+            submain = new Main("Party");
+            menu.Submenus.Add(submain);
+
+            submain.SmallFont = content.Load<SpriteFont>("Content\\Fonts\\Arial13");
         }
 
         public void InitializeParty()
         {
             this.party = new Party();
+
+            //Character1
+            char1 = new Combatant();
+            char1.ATK = 15;
+            char1.DEF = 17;
+            char1.HP = 40;
+            char1.MP = 12;
+            char1.MaxHP = 45;
+            char1.MaxMP = 20;
+            char1.Name = "Icon";
+            char1.FaceImage = "Content\\Characters\\Menu\\daniel";
+
+            //Character2
+            char2 = new Combatant();
+            char2.ATK = 12;
+            char2.DEF = 15;
+            char2.HP = 35;
+            char2.MP = 11;
+            char2.MaxHP = 75;
+            char2.MaxMP = 30;
+            char2.Name = "Splatilian";
+            char2.FaceImage = "Content\\Characters\\Menu\\michael";
+
+            //Character2
+            char3 = new Combatant();
+            char3.ATK = 16;
+            char3.DEF = 11;
+            char3.HP = 19;
+            char3.MP = 20;
+            char3.MaxHP = 60;
+            char3.MaxMP = 21;
+            char3.Name = "Vegeta";
+            char3.FaceImage = "Content\\Characters\\Menu\\vegeta";
+
+         
+            party.AddCombatant(char1, Party.Status.Active);
+            party.AddCombatant(char2, Party.Status.Active);
+            party.AddCombatant(char3, Party.Status.Active);
         }
         #endregion
 
@@ -178,6 +230,12 @@ namespace WindowsGame2
 
                 this.avatar.Texture = content.Load<Texture2D>("Content\\Characters\\Walking\\testchar");
                 menu.Texture = content.Load<Texture2D>("Content\\Menu\\MenuBackground");
+                submain.EmptyBar = content.Load<Texture2D>("Content\\Menu\\EmptyBar");
+                submain.FullBar = content.Load<Texture2D>("Content\\Menu\\FullBar");
+                
+                char1.Face = content.Load<Texture2D>(char1.FaceImage);
+                char2.Face = content.Load<Texture2D>(char2.FaceImage);
+                char3.Face = content.Load<Texture2D>(char3.FaceImage);
             }
 
             // TODO: Load any ResourceManagementMode.Manual content
@@ -428,7 +486,7 @@ namespace WindowsGame2
                 new Rectangle(0, 0, graphics.GraphicsDevice.Viewport.Width,
                 graphics.GraphicsDevice.Viewport.Height), Color.White);
 
-            menu.Draw(spritebatch, TargetElapsedTime);
+            menu.Draw(spritebatch, TargetElapsedTime, party);
         }
 
         public Vector2 GetMapPosition(Vector2 screenPosition)

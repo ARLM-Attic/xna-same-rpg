@@ -35,7 +35,7 @@
       <Processor>SpriteTextureProcessor</Processor>
       <Options>None</Options>
       <Output>bin\x86\Debug\Content\Menu\MenuBackground.xnb</Output>
-      <Time>2007-05-09T23:08:27.4288615-04:00</Time>
+      <Time>2007-05-10T01:54:12.307867-04:00</Time>
     </Item>
     <Item>
       <Source>Content\Characters\Walking\testchar.png</Source>
@@ -54,6 +54,60 @@
       <Options>None</Options>
       <Output>bin\x86\Debug\Content\Fonts\Arial17.xnb</Output>
       <Time>2007-05-09T23:08:27.0069865-04:00</Time>
+    </Item>
+    <Item>
+      <Source>Content\Characters\Menu\daniel.png</Source>
+      <Name>Content\Characters\Menu\daniel</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>SpriteTextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>bin\x86\Debug\Content\Characters\Menu\daniel.xnb</Output>
+      <Time>2007-05-10T00:30:51.5331865-04:00</Time>
+    </Item>
+    <Item>
+      <Source>Content\Characters\Menu\michael.png</Source>
+      <Name>Content\Characters\Menu\michael</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>SpriteTextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>bin\x86\Debug\Content\Characters\Menu\michael.xnb</Output>
+      <Time>2007-05-10T00:30:06.4649775-04:00</Time>
+    </Item>
+    <Item>
+      <Source>Content\Characters\Menu\vegeta.png</Source>
+      <Name>Content\Characters\Menu\vegeta</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>SpriteTextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>bin\x86\Debug\Content\Characters\Menu\vegeta.xnb</Output>
+      <Time>2007-05-10T00:33:56.3827055-04:00</Time>
+    </Item>
+    <Item>
+      <Source>Content\Menu\EmptyBar.png</Source>
+      <Name>Content\Menu\EmptyBar</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>SpriteTextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>bin\x86\Debug\Content\Menu\EmptyBar.xnb</Output>
+      <Time>2007-05-10T01:22:39.455621-04:00</Time>
+    </Item>
+    <Item>
+      <Source>Content\Menu\FullBar.png</Source>
+      <Name>Content\Menu\FullBar</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>SpriteTextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>bin\x86\Debug\Content\Menu\FullBar.xnb</Output>
+      <Time>2007-05-10T01:22:39.455621-04:00</Time>
+    </Item>
+    <Item>
+      <Source>Content\Fonts\Arial13.spritefont</Source>
+      <Name>Content\Fonts\Arial13</Name>
+      <Importer>FontDescriptionImporter</Importer>
+      <Processor>FontDescriptionProcessor</Processor>
+      <Options>None</Options>
+      <Output>bin\x86\Debug\Content\Fonts\Arial13.xnb</Output>
+      <Time>2007-05-10T02:10:36.4646505-04:00</Time>
     </Item>
     <Settings>
       <TargetPlatform>Windows</TargetPlatform>

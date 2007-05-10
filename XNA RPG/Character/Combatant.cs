@@ -28,14 +28,19 @@ namespace XNA_RPG.Character
         private int magicPower;
         private int vitality;
         private int speed;
-        private string image;
+        private string moveImage;
+        private string faceImage;
         private Texture2D texture;
+        private Texture2D face;
         // status effects
         private List<StatusEffect> statusEffects;
         public const int MaxLevel = 99;
         // graphics
         private int frameCount;
         private bool isMoving;
+        // max values
+        private int maxHP;
+        private int maxMP;
         #endregion
 
         #region Properties
@@ -143,15 +148,27 @@ namespace XNA_RPG.Character
             get { return this.statusEffects; }
         }
 
-        public string Image
+        public string MoveImage
         {
             get
             {
-                return image;
+                return moveImage;
             }
             set
             {
-                image = value;
+                moveImage = value;
+            }
+        }
+
+        public string FaceImage
+        {
+            get
+            {
+                return faceImage;
+            }
+            set
+            {
+                faceImage = value;
             }
         }
 
@@ -164,6 +181,18 @@ namespace XNA_RPG.Character
             set
             {
                 texture = value;
+            }
+        }
+
+        public Texture2D Face
+        {
+            get
+            {
+                return face;
+            }
+            set
+            {
+                face = value;
             }
         }
 
@@ -189,6 +218,18 @@ namespace XNA_RPG.Character
             {
                 isMoving = value;
             }
+        }
+
+        public int MaxHP
+        {
+            get { return this.maxHP; }
+            set { this.maxHP = value; }
+        }
+
+        public int MaxMP
+        {
+            get { return this.maxMP; }
+            set { this.maxMP = value; }
         }
         #endregion
 

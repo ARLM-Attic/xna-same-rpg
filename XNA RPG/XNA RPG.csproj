@@ -110,6 +110,10 @@
       <XNAUseContentPipeline>false</XNAUseContentPipeline>
       <Name>Menu</Name>
     </Compile>
+    <Compile Include="Menu\SubMenu.cs">
+      <XNAUseContentPipeline>false</XNAUseContentPipeline>
+      <Name>SubMenu</Name>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Character\Shield.cs">
       <XNAUseContentPipeline>false</XNAUseContentPipeline>

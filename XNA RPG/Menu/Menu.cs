@@ -18,6 +18,7 @@ namespace XNA_RPG.Menu
         private Texture2D texture;
         private SpriteFont menuFont;
         private TimeSpan gameTime;
+        private List<SubMenu> submenus;
 
         public Texture2D Texture
         {
@@ -43,25 +44,47 @@ namespace XNA_RPG.Menu
             }
         }
 
+        public List<SubMenu> Submenus
+        {
+            get
+            {
+                return submenus;
+            }
+            set
+            {
+                submenus = value;
+            }
+        }
+
         public Menu()
         {
             gameTime = new TimeSpan(0);
+            submenus = new List<SubMenu>();
         }
 
-        public void Draw(SpriteBatch spritebatch, TimeSpan time)
+        public void Draw(SpriteBatch spritebatch, TimeSpan time, Party party)
         {
-            this.gameTime += time;
-
-   
-
             spritebatch.DrawString(menuFont, GetPlayTime(gameTime),
-                new Vector2(600, 492), Color.White);
+                new Vector2(640, 492), Color.White);
+
+            foreach (SubMenu submenu in submenus)
+            {
+                spritebatch.DrawString(menuFont, submenu.Title,
+                    new Vector2(650, 60 + submenus.IndexOf(submenu) * 20), Color.White);
+
+                submenu.Draw(spritebatch, party, menuFont);
+            }
         }
 
         public string GetPlayTime(TimeSpan time)
         {
-            return ("Playtime: " + time.Hours + ":" 
+            return ("Time: " + time.Hours + ":"
                 + time.Minutes + ":" + time.Seconds);
+        }
+
+        public void UpdateGameTime(TimeSpan time)
+        {
+            gameTime += time;
         }
     }
 }

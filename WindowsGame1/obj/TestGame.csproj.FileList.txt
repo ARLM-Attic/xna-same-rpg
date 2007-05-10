@@ -13,3 +13,9 @@ bin\x86\Debug\Content\Characters\Walking\testchar.xnb
 bin\x86\Debug\Content\Map\Chipsets\dirt.jpg
 bin\x86\Debug\Content\Map\Chipsets\Grass1.jpg
 bin\x86\Debug\Content\Fonts\Arial17.xnb
+bin\x86\Debug\Content\Characters\Menu\daniel.xnb
+bin\x86\Debug\Content\Characters\Menu\michael.xnb
+bin\x86\Debug\Content\Characters\Menu\vegeta.xnb
+bin\x86\Debug\Content\Menu\EmptyBar.xnb
+bin\x86\Debug\Content\Menu\FullBar.xnb
+bin\x86\Debug\Content\Fonts\Arial13.xnb

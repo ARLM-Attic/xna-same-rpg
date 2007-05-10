@@ -518,7 +518,7 @@ namespace WindowsGame1
                 new Rectangle(0, 0, graphics.GraphicsDevice.Viewport.Width, 
                 graphics.GraphicsDevice.Viewport.Height), Color.White);            
 
-            menu.Draw(spritebatch, TargetElapsedTime);
+            //menu.Draw(spritebatch, TargetElapsedTime, party);
         }
 
         public Vector2 GetMapPosition(Vector2 screenPosition)

@@ -51,6 +51,8 @@
     <Reference Include="System">
       <Private>False</Private>
     </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Game1.cs">
@@ -69,6 +71,10 @@
     <Compile Include="Program.cs">
       <XNAUseContentPipeline>false</XNAUseContentPipeline>
       <Name>Program</Name>
+    </Compile>
+    <Compile Include="Submenus\Main.cs">
+      <XNAUseContentPipeline>false</XNAUseContentPipeline>
+      <Name>Main</Name>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -91,12 +97,6 @@
       <Processor>SpriteTextureProcessor</Processor>
       <Name>Grass1</Name>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Content\Menu\MenuBackground.png">
-      <XNAUseContentPipeline>true</XNAUseContentPipeline>
-      <Importer>TextureImporter</Importer>
-      <Processor>SpriteTextureProcessor</Processor>
-      <Name>MenuBackground</Name>
     </Content>
     <Content Include="Content\Characters\Walking\testchar.png">
       <XNAUseContentPipeline>true</XNAUseContentPipeline>
@@ -122,16 +122,59 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\Characters\Menu\daniel.png">
+      <XNAUseContentPipeline>true</XNAUseContentPipeline>
+      <Importer>TextureImporter</Importer>
+      <Processor>SpriteTextureProcessor</Processor>
+      <Name>daniel</Name>
+    </Content>
+    <Content Include="Content\Characters\Menu\michael.png">
+      <XNAUseContentPipeline>true</XNAUseContentPipeline>
+      <Importer>TextureImporter</Importer>
+      <Processor>SpriteTextureProcessor</Processor>
+      <Name>michael</Name>
+    </Content>
+    <Content Include="Content\Characters\Menu\vegeta.png">
+      <XNAUseContentPipeline>true</XNAUseContentPipeline>
+      <Importer>TextureImporter</Importer>
+      <Processor>SpriteTextureProcessor</Processor>
+      <Name>vegeta</Name>
+    </Content>
     <Content Include="Content\Fonts\Arial17.spritefont">
       <XNAUseContentPipeline>true</XNAUseContentPipeline>
       <Importer>FontDescriptionImporter</Importer>
       <Processor>FontDescriptionProcessor</Processor>
       <Name>Arial17</Name>
     </Content>
+    <Content Include="Content\Menu\EmptyBar.png">
+      <XNAUseContentPipeline>true</XNAUseContentPipeline>
+      <Importer>TextureImporter</Importer>
+      <Processor>SpriteTextureProcessor</Processor>
+      <Name>EmptyBar</Name>
+    </Content>
+    <Content Include="Content\Menu\FullBar.png">
+      <XNAUseContentPipeline>true</XNAUseContentPipeline>
+      <Importer>TextureImporter</Importer>
+      <Processor>SpriteTextureProcessor</Processor>
+      <Name>FullBar</Name>
+    </Content>
+    <Content Include="Content\Menu\MenuBackground.png">
+      <XNAUseContentPipeline>true</XNAUseContentPipeline>
+      <Importer>TextureImporter</Importer>
+      <Processor>SpriteTextureProcessor</Processor>
+      <Name>MenuBackground</Name>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\Fonts\Arial13.spritefont">
+      <XNAUseContentPipeline>true</XNAUseContentPipeline>
+      <Importer>FontDescriptionImporter</Importer>
+      <Processor>FontDescriptionProcessor</Processor>
+      <Name>Arial13</Name>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Content\Characters\Battle\" />
-    <Folder Include="Content\Characters\Menu\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\XNA\Game Studio Express\v1.0\Microsoft.Xna.ContentPipeline.targets" />
