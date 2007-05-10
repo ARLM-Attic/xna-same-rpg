@@ -7,7 +7,7 @@ using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Storage;
-using XNA_RPG.Map;
+using XNA_RPG.Mapping;
 using XNA_RPG.Character;
 using XNA_RPG.Menu;
 

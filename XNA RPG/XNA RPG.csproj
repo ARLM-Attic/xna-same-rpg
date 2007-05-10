@@ -66,6 +66,10 @@
       <XNAUseContentPipeline>false</XNAUseContentPipeline>
       <Name>Armor</Name>
     </Compile>
+    <Compile Include="Character\Avatar.cs">
+      <XNAUseContentPipeline>false</XNAUseContentPipeline>
+      <Name>Avatar</Name>
+    </Compile>
     <Compile Include="Character\Combatant.cs">
       <XNAUseContentPipeline>false</XNAUseContentPipeline>
       <Name>Combatant</Name>
@@ -86,17 +90,21 @@
       <XNAUseContentPipeline>false</XNAUseContentPipeline>
       <Name>Item</Name>
     </Compile>
-    <Compile Include="Map\Chipset.cs">
+    <Compile Include="Character\Party.cs">
+      <XNAUseContentPipeline>false</XNAUseContentPipeline>
+      <Name>Party</Name>
+    </Compile>
+    <Compile Include="Mapping\Chipset.cs">
       <XNAUseContentPipeline>false</XNAUseContentPipeline>
       <Name>Chipset</Name>
     </Compile>
-    <Compile Include="Map\Map.cs">
-      <XNAUseContentPipeline>false</XNAUseContentPipeline>
-      <Name>Map</Name>
-    </Compile>
-    <Compile Include="Map\ChipsetTile.cs">
+    <Compile Include="Mapping\ChipsetTile.cs">
       <XNAUseContentPipeline>false</XNAUseContentPipeline>
       <Name>ChipsetTile</Name>
+    </Compile>
+    <Compile Include="Mapping\Map.cs">
+      <XNAUseContentPipeline>false</XNAUseContentPipeline>
+      <Name>Map</Name>
     </Compile>
     <Compile Include="Menu\Menu.cs">
       <XNAUseContentPipeline>false</XNAUseContentPipeline>
@@ -114,6 +122,14 @@
     <Compile Include="Character\Weapon.cs">
       <XNAUseContentPipeline>false</XNAUseContentPipeline>
       <Name>Weapon</Name>
+    </Compile>
+    <Compile Include="XML\Class1.cs">
+      <XNAUseContentPipeline>false</XNAUseContentPipeline>
+      <Name>Class1</Name>
+    </Compile>
+    <Compile Include="XML\XMLAgent.cs">
+      <XNAUseContentPipeline>false</XNAUseContentPipeline>
+      <Name>XMLAgent</Name>
     </Compile>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
