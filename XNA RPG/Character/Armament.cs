@@ -5,10 +5,9 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace XNA_RPG.Character
 {
-    public class Armament
+    public class Armament : Item
     {
         #region Attributes
-        private string name;
         // stat boosts
         private int attackBoost;
         private int defenseBoost;
@@ -22,13 +21,6 @@ namespace XNA_RPG.Character
         #endregion
 
         #region Properties
-        /// <summary>This method gets/sets the name attribute.</summary>
-        public string Name
-        {
-            get { return this.name; }
-            set { this.name = value; }
-        }
-
         /// <summary>This method gets/sets the attack attribute.</summary>
         public int ATKBoost
         {

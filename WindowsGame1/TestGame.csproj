@@ -72,6 +72,10 @@
       <XNAUseContentPipeline>false</XNAUseContentPipeline>
       <Name>Program</Name>
     </Compile>
+    <Compile Include="Submenus\Items.cs">
+      <XNAUseContentPipeline>false</XNAUseContentPipeline>
+      <Name>Items</Name>
+    </Compile>
     <Compile Include="Submenus\Main.cs">
       <XNAUseContentPipeline>false</XNAUseContentPipeline>
       <Name>Main</Name>
@@ -171,6 +175,12 @@
       <Importer>FontDescriptionImporter</Importer>
       <Processor>FontDescriptionProcessor</Processor>
       <Name>Arial13</Name>
+    </Content>
+    <Content Include="Content\Menu\menuHand.png">
+      <XNAUseContentPipeline>true</XNAUseContentPipeline>
+      <Importer>TextureImporter</Importer>
+      <Processor>SpriteTextureProcessor</Processor>
+      <Name>menuHand</Name>
     </Content>
   </ItemGroup>
   <ItemGroup>

@@ -38,5 +38,11 @@ namespace XNA_RPG.Menu
         public virtual void Draw(SpriteBatch spritebatch, Party party, SpriteFont spriteFont)
         {
         }
+
+        public virtual bool UpdateSubMenu(KeyboardState keyboard)
+        {
+            return false;
+        }
+
     }
 }

@@ -34,10 +34,14 @@ namespace WindowsGame2
         Combatant char1;
         Combatant char2;
         Combatant char3;
+        Item potion;
+        Weapon sword;
+        Accessory chain;
 
         //Menu
         Menu menu;
         Main submain;
+        Items itemssub;
 
         private XMLAgent xmlAgent;
         private GameStates gameState;
@@ -159,7 +163,11 @@ namespace WindowsGame2
             menu.MenuFont = content.Load<SpriteFont>("Content\\Fonts\\Arial17");
 
             submain = new Main("Party");
-            menu.Submenus.Add(submain);
+            menu.MainSubMenu = submain;
+
+            itemssub = new Items("Items");
+            menu.Submenus.Add(itemssub);
+            
 
             submain.SmallFont = content.Load<SpriteFont>("Content\\Fonts\\Arial13");
         }
@@ -205,6 +213,16 @@ namespace WindowsGame2
             party.AddCombatant(char1, Party.Status.Active);
             party.AddCombatant(char2, Party.Status.Active);
             party.AddCombatant(char3, Party.Status.Active);
+
+            potion = new Item("Potion");
+            sword = new Weapon("Ragnarok");
+            chain = new Accessory("Golden Pendant");
+
+            party.Bag.AddItem(potion);
+            party.Bag.AddWeapon(sword);
+            party.Bag.AddAccessory(chain);
+
+            
         }
         #endregion
 
@@ -230,6 +248,7 @@ namespace WindowsGame2
 
                 this.avatar.Texture = content.Load<Texture2D>("Content\\Characters\\Walking\\testchar");
                 menu.Texture = content.Load<Texture2D>("Content\\Menu\\MenuBackground");
+                menu.Hand = content.Load<Texture2D>("Content\\Menu\\menuHand");
                 submain.EmptyBar = content.Load<Texture2D>("Content\\Menu\\EmptyBar");
                 submain.FullBar = content.Load<Texture2D>("Content\\Menu\\FullBar");
                 
@@ -418,9 +437,13 @@ namespace WindowsGame2
                     }
                     break;
                 case GameStates.InMenu:
-                    if (kbState.IsKeyDown(Keys.D))
+                    if (kbState.IsKeyDown(Keys.D) && menu.SubMenuActive == false)
                     {
                         this.gameState = GameStates.ReadyWorld;
+                    }
+                    else
+                    {
+                        menu.UpdateMenu(kbState);
                     }
                     break;
                 case GameStates.InBattle:

@@ -19,3 +19,4 @@ bin\x86\Debug\Content\Characters\Menu\vegeta.xnb
 bin\x86\Debug\Content\Menu\EmptyBar.xnb
 bin\x86\Debug\Content\Menu\FullBar.xnb
 bin\x86\Debug\Content\Fonts\Arial13.xnb
+bin\x86\Debug\Content\Menu\menuHand.xnb
