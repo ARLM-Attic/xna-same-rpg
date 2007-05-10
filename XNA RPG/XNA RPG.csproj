@@ -123,10 +123,6 @@
       <XNAUseContentPipeline>false</XNAUseContentPipeline>
       <Name>Weapon</Name>
     </Compile>
-    <Compile Include="XML\Class1.cs">
-      <XNAUseContentPipeline>false</XNAUseContentPipeline>
-      <Name>Class1</Name>
-    </Compile>
     <Compile Include="XML\XMLAgent.cs">
       <XNAUseContentPipeline>false</XNAUseContentPipeline>
       <Name>XMLAgent</Name>
