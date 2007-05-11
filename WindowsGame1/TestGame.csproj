@@ -176,11 +176,25 @@
       <Processor>FontDescriptionProcessor</Processor>
       <Name>Arial13</Name>
     </Content>
+    <Content Include="Content\Menu\ItemsBackground.png">
+      <XNAUseContentPipeline>true</XNAUseContentPipeline>
+      <Importer>TextureImporter</Importer>
+      <Processor>SpriteTextureProcessor</Processor>
+      <Name>ItemsBackground</Name>
+    </Content>
     <Content Include="Content\Menu\menuHand.png">
       <XNAUseContentPipeline>true</XNAUseContentPipeline>
       <Importer>TextureImporter</Importer>
       <Processor>SpriteTextureProcessor</Processor>
       <Name>menuHand</Name>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\Fonts\Arial9.spritefont">
+      <XNAUseContentPipeline>true</XNAUseContentPipeline>
+      <Importer>FontDescriptionImporter</Importer>
+      <Processor>FontDescriptionProcessor</Processor>
+      <Name>Arial9</Name>
     </Content>
   </ItemGroup>
   <ItemGroup>

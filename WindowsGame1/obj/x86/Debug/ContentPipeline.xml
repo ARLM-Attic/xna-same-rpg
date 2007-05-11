@@ -8,7 +8,7 @@
       <Processor>SpriteTextureProcessor</Processor>
       <Options>None</Options>
       <Output>bin\x86\Debug\Content\System\blank.xnb</Output>
-      <Time>2007-05-10T12:43:51-04:00</Time>
+      <Time>2007-05-09T23:08:27.5538615-04:00</Time>
     </Item>
     <Item>
       <Source>Content\Map\Chipsets\dirt.jpg</Source>
@@ -17,7 +17,7 @@
       <Processor>SpriteTextureProcessor</Processor>
       <Options>None</Options>
       <Output>bin\x86\Debug\Content\Map\Chipsets\dirt.xnb</Output>
-      <Time>2007-05-10T12:43:50.71875-04:00</Time>
+      <Time>2007-05-09T23:08:27.1319865-04:00</Time>
     </Item>
     <Item>
       <Source>Content\Map\Chipsets\Grass1.jpg</Source>
@@ -26,7 +26,7 @@
       <Processor>SpriteTextureProcessor</Processor>
       <Options>None</Options>
       <Output>bin\x86\Debug\Content\Map\Chipsets\Grass1.xnb</Output>
-      <Time>2007-05-10T12:43:50.8125-04:00</Time>
+      <Time>2007-05-09T23:08:27.2569865-04:00</Time>
     </Item>
     <Item>
       <Source>Content\Characters\Walking\testchar.png</Source>
@@ -35,7 +35,7 @@
       <Processor>SpriteTextureProcessor</Processor>
       <Options>None</Options>
       <Output>bin\x86\Debug\Content\Characters\Walking\testchar.xnb</Output>
-      <Time>2007-05-10T12:43:50.59375-04:00</Time>
+      <Time>2007-05-09T23:08:26.8976115-04:00</Time>
     </Item>
     <Item>
       <Source>Content\Characters\Menu\daniel.png</Source>
@@ -44,7 +44,7 @@
       <Processor>SpriteTextureProcessor</Processor>
       <Options>None</Options>
       <Output>bin\x86\Debug\Content\Characters\Menu\daniel.xnb</Output>
-      <Time>2007-05-10T11:51:18.890625-04:00</Time>
+      <Time>2007-05-10T00:30:51.5331865-04:00</Time>
     </Item>
     <Item>
       <Source>Content\Characters\Menu\michael.png</Source>
@@ -53,7 +53,7 @@
       <Processor>SpriteTextureProcessor</Processor>
       <Options>None</Options>
       <Output>bin\x86\Debug\Content\Characters\Menu\michael.xnb</Output>
-      <Time>2007-05-10T11:51:18.984375-04:00</Time>
+      <Time>2007-05-10T00:30:06.4649775-04:00</Time>
     </Item>
     <Item>
       <Source>Content\Characters\Menu\vegeta.png</Source>
@@ -62,7 +62,7 @@
       <Processor>SpriteTextureProcessor</Processor>
       <Options>None</Options>
       <Output>bin\x86\Debug\Content\Characters\Menu\vegeta.xnb</Output>
-      <Time>2007-05-10T11:51:19.078125-04:00</Time>
+      <Time>2007-05-10T00:33:56.3827055-04:00</Time>
     </Item>
     <Item>
       <Source>Content\Menu\EmptyBar.png</Source>
@@ -71,7 +71,7 @@
       <Processor>SpriteTextureProcessor</Processor>
       <Options>None</Options>
       <Output>bin\x86\Debug\Content\Menu\EmptyBar.xnb</Output>
-      <Time>2007-05-10T11:51:19.359375-04:00</Time>
+      <Time>2007-05-10T01:22:39.455621-04:00</Time>
     </Item>
     <Item>
       <Source>Content\Menu\FullBar.png</Source>
@@ -80,7 +80,7 @@
       <Processor>SpriteTextureProcessor</Processor>
       <Options>None</Options>
       <Output>bin\x86\Debug\Content\Menu\FullBar.xnb</Output>
-      <Time>2007-05-10T11:51:19.453125-04:00</Time>
+      <Time>2007-05-10T01:22:39.455621-04:00</Time>
     </Item>
     <Item>
       <Source>Content\Menu\MenuBackground.png</Source>
@@ -89,25 +89,7 @@
       <Processor>SpriteTextureProcessor</Processor>
       <Options>None</Options>
       <Output>bin\x86\Debug\Content\Menu\MenuBackground.xnb</Output>
-      <Time>2007-05-10T12:43:50.90625-04:00</Time>
-    </Item>
-    <Item>
-      <Source>Content\Fonts\Arial17.spritefont</Source>
-      <Name>Content\Fonts\Arial17</Name>
-      <Importer>FontDescriptionImporter</Importer>
-      <Processor>FontDescriptionProcessor</Processor>
-      <Options>None</Options>
-      <Output>bin\x86\Debug\Content\Fonts\Arial17.xnb</Output>
-      <Time>2007-05-10T11:51:19.265625-04:00</Time>
-    </Item>
-    <Item>
-      <Source>Content\Fonts\Arial13.spritefont</Source>
-      <Name>Content\Fonts\Arial13</Name>
-      <Importer>FontDescriptionImporter</Importer>
-      <Processor>FontDescriptionProcessor</Processor>
-      <Options>None</Options>
-      <Output>bin\x86\Debug\Content\Fonts\Arial13.xnb</Output>
-      <Time>2007-05-10T11:51:19.171875-04:00</Time>
+      <Time>2007-05-10T01:54:12.307867-04:00</Time>
     </Item>
     <Item>
       <Source>Content\Menu\menuHand.png</Source>
@@ -116,35 +98,71 @@
       <Processor>SpriteTextureProcessor</Processor>
       <Options>None</Options>
       <Output>bin\x86\Debug\Content\Menu\menuHand.xnb</Output>
-      <Time>2007-05-10T13:35:20.265625-04:00</Time>
+      <Time>2007-05-10T21:57:04.150228-04:00</Time>
+    </Item>
+    <Item>
+      <Source>Content\Fonts\Arial17.spritefont</Source>
+      <Name>Content\Fonts\Arial17</Name>
+      <Importer>FontDescriptionImporter</Importer>
+      <Processor>FontDescriptionProcessor</Processor>
+      <Options>None</Options>
+      <Output>bin\x86\Debug\Content\Fonts\Arial17.xnb</Output>
+      <Time>2007-05-09T23:08:27.0069865-04:00</Time>
+    </Item>
+    <Item>
+      <Source>Content\Fonts\Arial13.spritefont</Source>
+      <Name>Content\Fonts\Arial13</Name>
+      <Importer>FontDescriptionImporter</Importer>
+      <Processor>FontDescriptionProcessor</Processor>
+      <Options>None</Options>
+      <Output>bin\x86\Debug\Content\Fonts\Arial13.xnb</Output>
+      <Time>2007-05-10T02:10:36.4646505-04:00</Time>
+    </Item>
+    <Item>
+      <Source>Content\Menu\ItemsBackground.png</Source>
+      <Name>Content\Menu\ItemsBackground</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>SpriteTextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>bin\x86\Debug\Content\Menu\ItemsBackground.xnb</Output>
+      <Time>2007-05-10T22:50:12.4873685-04:00</Time>
+    </Item>
+    <Item>
+      <Source>Content\Fonts\Arial9.spritefont</Source>
+      <Name>Content\Fonts\Arial9</Name>
+      <Importer>FontDescriptionImporter</Importer>
+      <Processor>FontDescriptionProcessor</Processor>
+      <Options>None</Options>
+      <Output>bin\x86\Debug\Content\Fonts\Arial9.xnb</Output>
+      <Time>2007-05-11T00:23:57.766358-04:00</Time>
     </Item>
     <Settings>
       <TargetPlatform>Windows</TargetPlatform>
       <BuildConfiguration>Debug</BuildConfiguration>
-      <RootDirectory>F:\Visual Studio 2005\Projects\XNA RPG\WindowsGame1\</RootDirectory>
-      <IntermediateDirectory>F:\Visual Studio 2005\Projects\XNA RPG\WindowsGame1\obj\x86\Debug\</IntermediateDirectory>
-      <OutputDirectory>F:\Visual Studio 2005\Projects\XNA RPG\WindowsGame1\bin\x86\Debug\</OutputDirectory>
+      <RootDirectory>C:\Users\Daniel\Documents\Visual Studio 2005\Projects\XNA RPG\WindowsGame1\</RootDirectory>
+      <IntermediateDirectory>C:\Users\Daniel\Documents\Visual Studio 2005\Projects\XNA RPG\WindowsGame1\obj\x86\Debug\</IntermediateDirectory>
+      <OutputDirectory>C:\Users\Daniel\Documents\Visual Studio 2005\Projects\XNA RPG\WindowsGame1\bin\x86\Debug\</OutputDirectory>
     </Settings>
     <Assemblies>
       <Assembly>
-        <Key>D:\Program Files\Microsoft XNA\XNA Game Studio Express\v1.0\References\Windows\x86\Microsoft.Xna.Framework.Content.Pipeline.XImporter.dll</Key>
+        <Key>C:\Program Files (x86)\Microsoft XNA\XNA Game Studio Express\v1.0\References\Windows\x86\Microsoft.Xna.Framework.Content.Pipeline.XImporter.dll</Key>
         <Value>2007-04-05T12:17:30-04:00</Value>
       </Assembly>
       <Assembly>
-        <Key>D:\Program Files\Microsoft XNA\XNA Game Studio Express\v1.0\References\Windows\x86\Microsoft.Xna.Framework.Content.Pipeline.TextureImporter.dll</Key>
+        <Key>C:\Program Files (x86)\Microsoft XNA\XNA Game Studio Express\v1.0\References\Windows\x86\Microsoft.Xna.Framework.Content.Pipeline.TextureImporter.dll</Key>
         <Value>2007-04-05T12:18:14-04:00</Value>
       </Assembly>
       <Assembly>
-        <Key>D:\Program Files\Microsoft XNA\XNA Game Studio Express\v1.0\References\Windows\x86\Microsoft.Xna.Framework.Content.Pipeline.FBXImporter.dll</Key>
+        <Key>C:\Program Files (x86)\Microsoft XNA\XNA Game Studio Express\v1.0\References\Windows\x86\Microsoft.Xna.Framework.Content.Pipeline.FBXImporter.dll</Key>
         <Value>2007-04-05T12:18:04-04:00</Value>
       </Assembly>
       <Assembly>
-        <Key>D:\Program Files\Microsoft XNA\XNA Game Studio Express\v1.0\References\Windows\x86\Microsoft.Xna.Framework.Content.Pipeline.EffectImporter.dll</Key>
+        <Key>C:\Program Files (x86)\Microsoft XNA\XNA Game Studio Express\v1.0\References\Windows\x86\Microsoft.Xna.Framework.Content.Pipeline.EffectImporter.dll</Key>
         <Value>2007-04-05T12:17:16-04:00</Value>
       </Assembly>
       <Assembly>
-        <Key>D:\WINDOWS\assembly\GAC_32\Microsoft.Xna.Framework.Content.Pipeline\1.0.0.0__6d5c3888ef60e27d\Microsoft.Xna.Framework.Content.Pipeline.dll</Key>
-        <Value>2007-04-25T11:58:05.703125-04:00</Value>
+        <Key>C:\Windows\assembly\GAC_32\Microsoft.Xna.Framework.Content.Pipeline\1.0.0.0__6d5c3888ef60e27d\Microsoft.Xna.Framework.Content.Pipeline.dll</Key>
+        <Value>2007-04-27T19:47:48.3853125-04:00</Value>
       </Assembly>
     </Assemblies>
   </Asset>

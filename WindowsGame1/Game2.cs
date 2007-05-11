@@ -162,14 +162,13 @@ namespace WindowsGame2
             menu = new Menu();
             menu.MenuFont = content.Load<SpriteFont>("Content\\Fonts\\Arial17");
 
-            submain = new Main("Party");
+            submain = new Main("Party", content);
             menu.MainSubMenu = submain;
 
-            itemssub = new Items("Items");
+            itemssub = new Items("Items", content);
             menu.Submenus.Add(itemssub);
             
 
-            submain.SmallFont = content.Load<SpriteFont>("Content\\Fonts\\Arial13");
         }
 
         public void InitializeParty()
@@ -184,6 +183,7 @@ namespace WindowsGame2
             char1.MP = 12;
             char1.MaxHP = 45;
             char1.MaxMP = 20;
+            char1.Level = 3;
             char1.Name = "Icon";
             char1.FaceImage = "Content\\Characters\\Menu\\daniel";
 
@@ -195,6 +195,7 @@ namespace WindowsGame2
             char2.MP = 11;
             char2.MaxHP = 75;
             char2.MaxMP = 30;
+            char2.Level = 4;
             char2.Name = "Splatilian";
             char2.FaceImage = "Content\\Characters\\Menu\\michael";
 
@@ -206,6 +207,7 @@ namespace WindowsGame2
             char3.MP = 20;
             char3.MaxHP = 60;
             char3.MaxMP = 21;
+            char3.Level = 4;
             char3.Name = "Vegeta";
             char3.FaceImage = "Content\\Characters\\Menu\\vegeta";
 
@@ -249,8 +251,7 @@ namespace WindowsGame2
                 this.avatar.Texture = content.Load<Texture2D>("Content\\Characters\\Walking\\testchar");
                 menu.Texture = content.Load<Texture2D>("Content\\Menu\\MenuBackground");
                 menu.Hand = content.Load<Texture2D>("Content\\Menu\\menuHand");
-                submain.EmptyBar = content.Load<Texture2D>("Content\\Menu\\EmptyBar");
-                submain.FullBar = content.Load<Texture2D>("Content\\Menu\\FullBar");
+                
                 
                 char1.Face = content.Load<Texture2D>(char1.FaceImage);
                 char2.Face = content.Load<Texture2D>(char2.FaceImage);

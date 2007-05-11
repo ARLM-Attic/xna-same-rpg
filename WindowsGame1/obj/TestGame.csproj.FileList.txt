@@ -20,3 +20,5 @@ bin\x86\Debug\Content\Menu\EmptyBar.xnb
 bin\x86\Debug\Content\Menu\FullBar.xnb
 bin\x86\Debug\Content\Fonts\Arial13.xnb
 bin\x86\Debug\Content\Menu\menuHand.xnb
+bin\x86\Debug\Content\Menu\ItemsBackground.xnb
+bin\x86\Debug\Content\Fonts\Arial9.xnb

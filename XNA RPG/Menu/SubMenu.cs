@@ -17,6 +17,7 @@ namespace XNA_RPG.Menu
     {
 
         private string title;
+        private ContentManager content;
 
         public string Title
         {
@@ -30,9 +31,10 @@ namespace XNA_RPG.Menu
             }
         }
 
-        public SubMenu(string title)
+        public SubMenu(string title, ContentManager content)
         {
             this.title = title;
+            this.content = content;
         }
 
         public virtual void Draw(SpriteBatch spritebatch, Party party, SpriteFont spriteFont)

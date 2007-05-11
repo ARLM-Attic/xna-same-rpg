@@ -156,9 +156,9 @@ namespace XNA_RPG.Menu
                     submenu.Draw(spritebatch, party, menuFont);
                 }
 
-                if (handIndex == submenus.IndexOf(submenu))
+                if (handIndex == submenus.IndexOf(submenu) && subMenuActive == false)
                 {
-                    spritebatch.Draw(hand, new Vector2(500, 55 + submenus.IndexOf(submenu) * 20), Color.White);
+                    spritebatch.Draw(hand, new Rectangle(580, 60 + submenus.IndexOf(submenu) * 20, 60, 40), Color.White);
                 }
             }
 

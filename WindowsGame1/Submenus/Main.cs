@@ -56,10 +56,12 @@ namespace WindowsGame1.Submenus
             }
         }
 
-        public Main(string title)
-            : base(title)
+        public Main(string title, ContentManager content)
+            : base(title, content)
         {
-
+            smallFont = content.Load<SpriteFont>("Content\\Fonts\\Arial13");
+            emptyBar = content.Load<Texture2D>("Content\\Menu\\EmptyBar");
+            fullBar = content.Load<Texture2D>("Content\\Menu\\FullBar");
         }
 
         public override void Draw(SpriteBatch spritebatch, Party party, SpriteFont menuFont)
@@ -68,12 +70,15 @@ namespace WindowsGame1.Submenus
             for (int i = 0; i < party.ActiveMembers.Count; i++)
             {
 
-                Vector2 start = new Vector2(100, i * 150 + 100);
+                Vector2 start = new Vector2(80, i * 150 + 100);
                 Combatant comb = party.ActiveMembers[i];
 
                 spritebatch.Draw(comb.Face, new Vector2(start.X + 5, start.Y + 5), Color.White);
                 
                 spritebatch.DrawString(menuFont, comb.Name, new Vector2(start.X + 200, start.Y + 10),
+                    Color.White);
+
+                spritebatch.DrawString(menuFont, "LV " + comb.Level, new Vector2(start.X + 340, start.Y + 10),
                     Color.White);
 
                 spritebatch.DrawString(menuFont, "HP", new Vector2(start.X + 150, start.Y + 40), Color.White);
