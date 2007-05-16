@@ -11,6 +11,8 @@ using XNA_RPG.Character;
 using XNA_RPG.Battling;
 using XNA_RPG.Menu;
 using XNA_RPG.XML;
+using XNA_RPG.Items;
+using WindowsGame1.Submenus;
 
 namespace WindowsGame2
 {
@@ -23,6 +25,8 @@ namespace WindowsGame2
         Chipset chipset;
         Chipset systemchipset;
         Map map;
+        Main submain;
+        Items itemssub;
         //Graphics
         private Avatar avatar;
         SpriteBatch spritebatch;
@@ -33,7 +37,15 @@ namespace WindowsGame2
 
         private XMLAgent xmlAgent;
         private GameStates gameState;
+
+        //party
         private Party party;
+        private Combatant char1;
+        private Combatant char2;
+        private Combatant char3;
+        private XNA_RPG.Items.ApplicableItem potion;
+        private XNA_RPG.Items.Weapon sword;
+        private XNA_RPG.Items.EquipableItem chain;
         //Constants/Enums
         public enum GameStates { InStartMenu, ReadyWorld, InWorld, ReadyMenu,
             InMenu, InBattle };
@@ -155,11 +167,69 @@ namespace WindowsGame2
         {
             menu = new Menu();
             menu.MenuFont = content.Load<SpriteFont>("Content\\Fonts\\Arial17");
+
+            submain = new Main("Main", content);
+            menu.MainSubMenu = submain;
+
+            itemssub = new Items("Items", content);
+            menu.Submenus.Add(itemssub);
+
+            menu.Hand = content.Load<Texture2D>("Content\\Menu\\menuHand");
         }
 
         public void InitializeParty()
         {
             this.party = new Party();
+
+            //Character1
+            char1 = new Combatant();
+            char1.ATK = 15;
+            char1.DEF = 17;
+            char1.HP = 40;
+            char1.MP = 12;
+            char1.MaxHP = 45;
+            char1.MaxMP = 20;
+            char1.Level = 3;
+            char1.Name = "Icon";
+            char1.Face = content.Load < Texture2D >("Content\\Characters\\Menu\\daniel");
+
+            //Character2
+            char2 = new Combatant();
+            char2.ATK = 12;
+            char2.DEF = 15;
+            char2.HP = 35;
+            char2.MP = 11;
+            char2.MaxHP = 75;
+            char2.MaxMP = 30;
+            char2.Level = 4;
+            char2.Name = "Splatilian";
+            char2.Face = content.Load < Texture2D >("Content\\Characters\\Menu\\michael");
+
+            //Character2
+            char3 = new Combatant();
+            char3.ATK = 16;
+            char3.DEF = 11;
+            char3.HP = 19;
+            char3.MP = 20;
+            char3.MaxHP = 60;
+            char3.MaxMP = 21;
+            char3.Level = 4;
+            char3.Name = "Vegeta";
+            char3.Face = content.Load<Texture2D>("Content\\Characters\\Menu\\vegeta");
+
+
+            party.AddCombatant(char1, Party.Status.Active);
+            party.AddCombatant(char2, Party.Status.Active);
+            party.AddCombatant(char3, Party.Status.Active);
+
+            potion = new ApplicableItem("Potion", new ApplicableItem.Application());
+            sword = new XNA_RPG.Items.Weapon("Ragnarok");
+            chain = new XNA_RPG.Items.EquipableItem("Golden Pendant");
+
+            //party.Bag.AddItem(potion);
+            //party.Bag.AddWeapon(sword);
+            //party.Bag.AddAccessory(chain);
+
         }
         #endregion
 
@@ -387,6 +457,9 @@ namespace WindowsGame2
                     }
                     break;
                 case GameStates.InMenu:
+
+                    menu.UpdateMenu(kbState, party);
+
                     if (kbState.IsKeyDown(this.MenuKey))
                     {
                         this.gameState = GameStates.ReadyWorld;

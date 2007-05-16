@@ -23,9 +23,11 @@ namespace XNA_RPG.Mapping
         private ChipsetTile[,] objectLayer;
 
         private Vector2 focus;
+
         private Texture2D battleBackground;
 
         #region Accessors
+
         public Chipset Chipset
         {
             get
@@ -108,8 +110,14 @@ namespace XNA_RPG.Mapping
 
         public Texture2D BattleBackground
         {
-            get { return this.battleBackground; }
-            set { this.battleBackground = value; }
+            get
+            {
+                return battleBackground;
+            }
+            set
+            {
+                battleBackground = value;
+            }
         }
         #endregion
 

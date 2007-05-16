@@ -64,6 +64,14 @@
       <XNAUseContentPipeline>false</XNAUseContentPipeline>
       <Name>Game1</Name>
     </Compile>
+    <Compile Include="Submenus\Items.cs">
+      <XNAUseContentPipeline>false</XNAUseContentPipeline>
+      <Name>Items</Name>
+    </Compile>
+    <Compile Include="Submenus\Main.cs">
+      <XNAUseContentPipeline>false</XNAUseContentPipeline>
+      <Name>Main</Name>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs">
       <XNAUseContentPipeline>false</XNAUseContentPipeline>
       <Name>AssemblyInfo</Name>

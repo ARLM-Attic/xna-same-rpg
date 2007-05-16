@@ -16,7 +16,7 @@ namespace WindowsGame1.Submenus
 {
     public class Items : SubMenu
     {
-        private enum Choice { Use = 0, Sort = 1, Discard = 2, None = 3 };
+        private enum ChoiceState { Use, UseReady, UseChar, UseCharReady, ApplyItem, ApplyItemReady, Sort, SortReady, Discard, DiscardReady, Home, HomeReady };
         private Texture2D background;
         private Texture2D hand;
         private Texture2D emptyBar;
@@ -24,11 +24,12 @@ namespace WindowsGame1.Submenus
         private SpriteFont spriteFont;
         private SpriteFont smallFont;
         private int handIndex;
-        private int subIndex;
-        private Choice subActive;
+        private int itemIndex;
+        private ChoiceState state;
         private List<string> inventory;
-        private Keys[] pressedKeys;
-
+        private Keys waitingKey;
+        private Vector2 lastValidHand;
+        private bool first;
 
         public Items(string title, ContentManager content)
             : base(title, content)
@@ -39,10 +40,12 @@ namespace WindowsGame1.Submenus
             fullBar = content.Load<Texture2D>("Content\\Menu\\FullBar");
             spriteFont = content.Load<SpriteFont>("Content\\Fonts\\Arial13");
             smallFont = content.Load<SpriteFont>("Content\\Fonts\\Arial9");
-            handIndex = (int)Choice.Use;
-            subActive = Choice.None;
-            subIndex = 0;
-            pressedKeys = new Keys[0];
+            handIndex = 0;
+            state = ChoiceState.Home;
+            itemIndex = 0;
+
+            first = true;
+            waitingKey = Keys.Left;
         }
 
         public override void Draw(SpriteBatch spritebatch, Party party, SpriteFont spriteFont)
@@ -50,18 +53,15 @@ namespace WindowsGame1.Submenus
 
             inventory = GetItems(party);
 
-            foreach (DictionaryEntry item in party.Bag.Items)
-            {
-                inventory.Add((string)item.Key);
-            }
-
             spritebatch.Draw(background, new Rectangle(20, 0, 600, 600), Color.White);
 
             spritebatch.DrawString(spriteFont, "Use", new Vector2(180, 20), Color.White);
             spritebatch.DrawString(spriteFont, "Sort", new Vector2(280, 20), Color.White);
             spritebatch.DrawString(spriteFont, "Discard", new Vector2(380, 20), Color.White);
 
-            spritebatch.Draw(hand, new Rectangle(handIndex * 100 + 120, 20, 60, 40), Color.White);
+            lastValidHand = GetHandPosition();
+
+            spritebatch.Draw(hand, new Rectangle((int)lastValidHand.X, (int)lastValidHand.Y, 60, 40), Color.White);
 
 
             for (int i = 0; i < inventory.Count; i++)
@@ -73,7 +73,7 @@ namespace WindowsGame1.Submenus
 
             DrawCharacters(spritebatch, party);
 
-
+            spritebatch.Draw(hand, new Rectangle((int)lastValidHand.X, (int)lastValidHand.Y, 60, 40), Color.White);
 
         }
 
@@ -116,84 +116,238 @@ namespace WindowsGame1.Submenus
             return items;
         }
 
-        public override bool UpdateSubMenu(KeyboardState keyboard)
+        public override bool UpdateSubMenu(KeyboardState keyboard, Party party)
         {
 
-            
-
-            List<Keys> keys = new List<Keys>();
-
-            foreach (Keys k in pressedKeys)
+            if (first == true)
             {
-                if (keyboard.IsKeyUp(k))
+
+                if (keyboard.IsKeyUp(Keys.F))
                 {
-                    keys.Add(k);
+                    first = false;
                 }
+
+                return true;
             }
 
-            pressedKeys = keyboard.GetPressedKeys();
 
-            if (keys.Count > 0)
+            switch (state)
             {
-                if (keys[0] == (Keys.Back))
-                {
+                case ChoiceState.Home:
 
-                    return false;
-                }
-                else if (keys[0] == (Keys.Left))
-                {
-                    if (handIndex != 0)
+                    if (keyboard.IsKeyDown(Keys.Left))
                     {
+                        state = ChoiceState.HomeReady;
+                        waitingKey = Keys.Left;
+                    }
+
+                    else if (keyboard.IsKeyDown(Keys.Right))
+                    {
+                        state = ChoiceState.HomeReady;
+                        waitingKey = Keys.Right;
+                    }
+
+                    else if (keyboard.IsKeyDown(Keys.Back))
+                    {
+                        first = true;
+                        return false;
+                    }
+
+                    else if (keyboard.IsKeyDown(Keys.F))
+                    {
+                        if (handIndex == 0)
+                        {
+                            state = ChoiceState.UseReady;
+                            waitingKey = Keys.F;
+                        }
+                        else if (handIndex == 1)
+                        {
+                            state = ChoiceState.SortReady;
+                            waitingKey = Keys.F;
+                        }
+                        else if (handIndex == 2)
+                        {
+                            state = ChoiceState.DiscardReady;
+                            waitingKey = Keys.F;
+                        }
+
+                        handIndex = 0;
+                    }
+
+                    return true;
+
+                case ChoiceState.HomeReady:
+
+                    if (keyboard.IsKeyUp(Keys.Left) && waitingKey == Keys.Left
+                        && handIndex > 0)
+                    {
+                        handIndex--;
+                        state = ChoiceState.Home;
+                    }
+                    else if (keyboard.IsKeyUp(Keys.Right) && waitingKey == Keys.Right
+                        && handIndex < 2)
+                    {
+                        handIndex++;
+                        state = ChoiceState.Home;
+                    }
+                    else if (keyboard.IsKeyUp(Keys.Back) && waitingKey == Keys.Back)
+                    {
+                        state = ChoiceState.Home;
+                        handIndex = 0;
+                    }
+
+                    return true;
+
+                case ChoiceState.UseReady:
+
+                    if (keyboard.IsKeyUp(Keys.F) && waitingKey == Keys.F)
+                    {
+                        state = ChoiceState.Use;
+
+                    }
+
+                    else if (keyboard.IsKeyUp(Keys.Down) && waitingKey == Keys.Down)
+                    {
+                        handIndex++;
+                        state = ChoiceState.Use;
+
+                    }
+
+                    else if (keyboard.IsKeyUp(Keys.Up) && waitingKey == Keys.Up)
+                    {
+                        handIndex--;
+                        state = ChoiceState.Use;
+
+                    }
+
+                    else if (keyboard.IsKeyUp(Keys.Back) && waitingKey == Keys.Back)
+                    {
+                        state = ChoiceState.Use;
+                        handIndex = itemIndex;
+                    }
+
+                    return true;
+
+                case ChoiceState.Use:
+
+                    if (keyboard.IsKeyDown(Keys.Back))
+                    {
+                        state = ChoiceState.HomeReady;
+                        waitingKey = Keys.Back;
+                    }
+
+                    else if (keyboard.IsKeyDown(Keys.Down) && handIndex < inventory.Count - 1)
+                    {
+                        state = ChoiceState.UseReady;
+                        waitingKey = Keys.Down;
+                    }
+
+                    else if (keyboard.IsKeyDown(Keys.Up) && handIndex > 0)
+                    {
+                        state = ChoiceState.UseReady;
+                        waitingKey = Keys.Up;
+                    }
+
+                    else if (keyboard.IsKeyDown(Keys.F))
+                    {
+                        state = ChoiceState.UseCharReady;
+                        waitingKey = Keys.F;
+                        itemIndex = handIndex;
+                        handIndex = 0;
+                    }
+                    return true;
+
+                case ChoiceState.UseCharReady:
+
+                    if (keyboard.IsKeyUp(Keys.F) && waitingKey == Keys.F)
+                    {
+                        state = ChoiceState.UseChar;
+                    }
+
+                    else if (keyboard.IsKeyUp(Keys.Down) && waitingKey == Keys.Down)
+                    {
+                        state = ChoiceState.UseChar;
+                        handIndex++;
+                    }
+
+                    else if (keyboard.IsKeyUp(Keys.Up) && waitingKey == Keys.Up)
+                    {
+                        state = ChoiceState.UseChar;
                         handIndex--;
                     }
 
                     return true;
-                }
-                else if (keys[0] == (Keys.Right))
-                {
-                    if (handIndex < 2)
+
+                case ChoiceState.UseChar:
+
+                    if (keyboard.IsKeyDown(Keys.F))
                     {
-                        handIndex++;
+                        waitingKey = Keys.F;
+                        state = ChoiceState.ApplyItemReady;
+                    }
+
+                    else if (keyboard.IsKeyDown(Keys.Up) && handIndex > 0)
+                    {
+                        state = ChoiceState.UseCharReady;
+                        waitingKey = Keys.Up;
+                    }
+
+                    else if (keyboard.IsKeyDown(Keys.Down) && handIndex < party.ActiveMembers.Count - 1)
+                    {
+                        state = ChoiceState.UseCharReady;
+                        waitingKey = Keys.Down;
+                    }
+
+                    else if (keyboard.IsKeyDown(Keys.Back))
+                    {
+                        state = ChoiceState.UseReady;
+                        waitingKey = Keys.Back;
                     }
 
                     return true;
-                }
-                else if (keys[0] == (Keys.Up))
-                {
-                    if (subActive != Choice.None && subIndex < inventory.Count - 1)
+
+                case ChoiceState.ApplyItemReady:
+
+                    if (keyboard.IsKeyUp(Keys.F) && waitingKey == Keys.F)
                     {
-                        subIndex++;
+                        state = ChoiceState.ApplyItem;
                     }
 
                     return true;
-                }
-                else if (keys[0] == (Keys.Down))
-                {
-                    if (subActive != Choice.None && subIndex > 0)
-                    {
-                        subIndex--;
-                    }
+
+                case ChoiceState.ApplyItem:
+
+                    //still need to change items around, can't use item right now
+                    state = ChoiceState.Use;
+                    handIndex = itemIndex;
+                    //Also, need to remove item after use, and determine if index is still ok.
 
                     return true;
-                }
-                else if (keys[0] == (Keys.F))
-                {
 
-
+                default:
                     return true;
-                }
-                else
-                {
-                    return true;
-                }
-
             }
-            else
+
+        }
+
+        public Vector2 GetHandPosition()
+        {
+
+
+            switch (state)
             {
-                return true;
-            }
+                case ChoiceState.Home:
+                    return new Vector2(handIndex * 100 + 120, 20);
 
-            
+                case ChoiceState.Use:
+                    return new Vector2(318, handIndex * 25 + 100);
+                
+                case ChoiceState.UseChar:
+                    return new Vector2(10, handIndex * 150 + 150);
+
+                default:
+                    return lastValidHand;
+            }
         }
 
         public void DrawCharacters(SpriteBatch spritebatch, Party party)
@@ -234,12 +388,12 @@ namespace WindowsGame1.Submenus
             }
         }
 
-             public int GetBarFill(int current, int max)
+        public int GetBarFill(int current, int max)
         {
             float ratio = (float)current / (float)max;
 
             return ((int)(ratio * 80));
         }
-        
+
     }
 }

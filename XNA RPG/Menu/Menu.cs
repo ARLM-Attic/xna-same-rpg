@@ -11,6 +11,7 @@ using XNA_RPG.Mapping;
 using XNA_RPG.Character;
 using XNA_RPG.Menu;
 
+
 namespace XNA_RPG.Menu
 {
     public class Menu
@@ -145,7 +146,7 @@ namespace XNA_RPG.Menu
             {
                 mainSubmenu.Draw(spritebatch, party, menuFont);
             }
-   
+
             foreach (SubMenu submenu in submenus)
             {
                 spritebatch.DrawString(menuFont, submenu.Title,
@@ -176,11 +177,11 @@ namespace XNA_RPG.Menu
             gameTime += time;
         }
 
-        public void UpdateMenu(KeyboardState keyboard)
+        public void UpdateMenu(KeyboardState keyboard, Party party)
         {
             if (subMenuActive == true)
             {
-                bool stillActive = submenus[selectedIndex].UpdateSubMenu(keyboard);
+                bool stillActive = submenus[selectedIndex].UpdateSubMenu(keyboard, party);
 
                 if (stillActive == false)
                 {
@@ -193,6 +194,7 @@ namespace XNA_RPG.Menu
                 {
                     subMenuActive = true;
                     selectedIndex = handIndex;
+
                 }
                 else if (keyboard.IsKeyDown(Keys.Up) && handIndex != 0)
                 {
@@ -208,4 +210,3 @@ namespace XNA_RPG.Menu
         }
     }
 }
-

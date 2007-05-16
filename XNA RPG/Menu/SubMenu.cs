@@ -41,7 +41,7 @@ namespace XNA_RPG.Menu
         {
         }
 
-        public virtual bool UpdateSubMenu(KeyboardState keyboard)
+        public virtual bool UpdateSubMenu(KeyboardState keyboard, Party party)
         {
             return false;
         }
