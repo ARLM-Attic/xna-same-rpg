@@ -77,7 +77,6 @@ namespace XNA_RPG.Character
         }
         #endregion
 
-
         #region Methods
         public bool KeyExists(string s, Hashtable ht)
         {

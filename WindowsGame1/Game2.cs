@@ -8,9 +8,9 @@ using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Storage;
 using XNA_RPG.Mapping;
 using XNA_RPG.Character;
+using XNA_RPG.Battling;
 using XNA_RPG.Menu;
 using XNA_RPG.XML;
-using WindowsGame1.Submenus;
 
 namespace WindowsGame2
 {
@@ -28,20 +28,8 @@ namespace WindowsGame2
         SpriteBatch spritebatch;
         Vector2 screenSize;
         Vector2 focus;
-        Vector2 oldFocus;
-
-        //Party
-        Combatant char1;
-        Combatant char2;
-        Combatant char3;
-        Item potion;
-        Weapon sword;
-        Accessory chain;
-
-        //Menu
         Menu menu;
-        Main submain;
-        Items itemssub;
+        private Battle battle;
 
         private XMLAgent xmlAgent;
         private GameStates gameState;
@@ -49,6 +37,10 @@ namespace WindowsGame2
         //Constants/Enums
         public enum GameStates { InStartMenu, ReadyWorld, InWorld, ReadyMenu,
             InMenu, InBattle };
+        public Keys ConfirmKey = Keys.F;
+        public Keys CancelKey = Keys.S;
+        public Keys MenuKey = Keys.D;
+        public Keys MapKey = Keys.A;
         #endregion
 
         public Game2()
@@ -155,76 +147,19 @@ namespace WindowsGame2
                 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
                 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
             });
+
+            map = new Map(chipset, 20, 20);
         }
         
         public void InitializeMenu()
         {
             menu = new Menu();
             menu.MenuFont = content.Load<SpriteFont>("Content\\Fonts\\Arial17");
-
-            submain = new Main("Party", content);
-            menu.MainSubMenu = submain;
-
-            itemssub = new Items("Items", content);
-            menu.Submenus.Add(itemssub);
-            
-
         }
 
         public void InitializeParty()
         {
             this.party = new Party();
-
-            //Character1
-            char1 = new Combatant();
-            char1.ATK = 15;
-            char1.DEF = 17;
-            char1.HP = 40;
-            char1.MP = 12;
-            char1.MaxHP = 45;
-            char1.MaxMP = 20;
-            char1.Level = 3;
-            char1.Name = "Icon";
-            char1.FaceImage = "Content\\Characters\\Menu\\daniel";
-
-            //Character2
-            char2 = new Combatant();
-            char2.ATK = 12;
-            char2.DEF = 15;
-            char2.HP = 35;
-            char2.MP = 11;
-            char2.MaxHP = 75;
-            char2.MaxMP = 30;
-            char2.Level = 4;
-            char2.Name = "Splatilian";
-            char2.FaceImage = "Content\\Characters\\Menu\\michael";
-
-            //Character2
-            char3 = new Combatant();
-            char3.ATK = 16;
-            char3.DEF = 11;
-            char3.HP = 19;
-            char3.MP = 20;
-            char3.MaxHP = 60;
-            char3.MaxMP = 21;
-            char3.Level = 4;
-            char3.Name = "Vegeta";
-            char3.FaceImage = "Content\\Characters\\Menu\\vegeta";
-
-         
-            party.AddCombatant(char1, Party.Status.Active);
-            party.AddCombatant(char2, Party.Status.Active);
-            party.AddCombatant(char3, Party.Status.Active);
-
-            potion = new Item("Potion");
-            sword = new Weapon("Ragnarok");
-            chain = new Accessory("Golden Pendant");
-
-            party.Bag.AddItem(potion);
-            party.Bag.AddWeapon(sword);
-            party.Bag.AddAccessory(chain);
-
-            
         }
         #endregion
 
@@ -250,12 +185,6 @@ namespace WindowsGame2
 
                 this.avatar.Texture = content.Load<Texture2D>("Content\\Characters\\Walking\\testchar");
                 menu.Texture = content.Load<Texture2D>("Content\\Menu\\MenuBackground");
-                menu.Hand = content.Load<Texture2D>("Content\\Menu\\menuHand");
-                
-                
-                char1.Face = content.Load<Texture2D>(char1.FaceImage);
-                char2.Face = content.Load<Texture2D>(char2.FaceImage);
-                char3.Face = content.Load<Texture2D>(char3.FaceImage);
             }
 
             // TODO: Load any ResourceManagementMode.Manual content
@@ -292,7 +221,7 @@ namespace WindowsGame2
                 case GameStates.InStartMenu:
                     break;
                 case GameStates.ReadyWorld:
-                    if (kbState.IsKeyUp(Keys.D))
+                    if (kbState.IsKeyUp(this.MenuKey))
                     {
                         this.gameState = GameStates.InWorld;
                     }
@@ -300,20 +229,7 @@ namespace WindowsGame2
                 case GameStates.InWorld:
                     Vector2 pos = this.avatar.Position;
                     Vector2 foc = this.focus;
-                    //Vector2 mapPos = this.GetMapPosition(pos);
                     Vector2 mapPos = this.GetAvatarMapPosition(this.avatar);
-                    if (pos != null)
-                    {
-                        this.avatar.LastPosition = pos;
-                    }
-                    if (foc != null)
-                    {
-                        this.oldFocus = foc;
-                    }
-                    if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)
-                    {
-                        this.Exit();
-                    }
 
                     // Check for movement
                     if (kbState.IsKeyDown(Keys.Up) || kbState.IsKeyDown(Keys.Down) ||
@@ -332,7 +248,8 @@ namespace WindowsGame2
                     float focusXBound = this.map.Width - this.screenSize.X;
                     float avatarYBound = this.graphics.GraphicsDevice.Viewport.Height - ChipsetTile.Height;
                     float avatarXBound = this.graphics.GraphicsDevice.Viewport.Width - ChipsetTile.Width;
-                    float increment = this.avatar.WalkingSpeed / 100.0f;
+                    float speed = this.avatar.WalkingSpeed;
+                    float increment = speed / 100.0f;
                     if (kbState.IsKeyDown(Keys.Up))
                     {
                         this.avatar.Direction = Direction.UP;
@@ -342,17 +259,27 @@ namespace WindowsGame2
                             {
                                 mapPos.Y = 1;
                             }
-                            int aboveTile = this.map.BottomLayer[(int)mapPos.X, (int)mapPos.Y - 1];
-                            if (this.chipset.Tiles[aboveTile].IsWalkable)
+                            else if (mapPos.Y % 1 > increment)
+                            {
+                                mapPos.Y = (int)(mapPos.Y + 1);
+                            }
+                            int north = this.map.BottomLayer[(int)mapPos.X, (int)mapPos.Y - 1];
+                            int northEast = this.map.BottomLayer[(int)mapPos.X + 1, (int)mapPos.Y - 1];
+                            if (mapPos.X % 1 < increment || (1 - mapPos.X % 1) < increment)
+                            {
+                                northEast = north;
+                            }
+                            if (this.chipset.Tiles[north].IsWalkable &&
+                                this.chipset.Tiles[northEast].IsWalkable)
                             {
                                 float newfocy = foc.Y - increment;
-                                if (pos.Y <= (midViewHeight + this.avatar.WalkingSpeed) && newfocy > 0)
+                                if (pos.Y <= (midViewHeight + speed) && newfocy > 0)
                                 {
                                     this.focus.Y = newfocy;
                                 }
                                 else if (this.focus.Y <= increment || this.focus.Y >= (focusYBound - increment))
                                 {
-                                    this.avatar.Position = new Vector2(pos.X, (pos.Y - this.avatar.WalkingSpeed));
+                                    this.avatar.Position = new Vector2(pos.X, (pos.Y - speed));
                                 }
                             }
                         }
@@ -360,13 +287,19 @@ namespace WindowsGame2
                     else if (kbState.IsKeyDown(Keys.Down))
                     {
                         this.avatar.Direction = Direction.DOWN;
-                        if (mapPos.Y < (map.Height - 1))
+                        if (mapPos.Y < (map.Height - 1 - increment))
                         {
-                            int belowTile = this.map.BottomLayer[(int)mapPos.X, (int)mapPos.Y + 1];
-                            if (this.chipset.Tiles[belowTile].IsWalkable)
+                            int south = this.map.BottomLayer[(int)mapPos.X, (int)mapPos.Y + 1];
+                            int southEast = this.map.BottomLayer[(int)mapPos.X + 1, (int)mapPos.Y + 1];
+                            if (mapPos.X % 1 < increment || (1 - mapPos.X % 1) < increment)
+                            {
+                                southEast = south;
+                            }
+                            if (this.chipset.Tiles[south].IsWalkable &&
+                                this.chipset.Tiles[southEast].IsWalkable)
                             {
                                 float newfocy = foc.Y + increment;
-                                if (pos.Y >= (midViewHeight - this.avatar.WalkingSpeed) &&
+                                if (pos.Y >= (midViewHeight - speed) &&
                                     newfocy <= focusYBound && newfocy > 0)
                                 {
                                     this.focus.Y = newfocy;
@@ -374,7 +307,7 @@ namespace WindowsGame2
                                 else if ((this.focus.Y >= (focusYBound - increment) || this.focus.Y <= increment) &&
                                     pos.Y <= avatarYBound)
                                 {
-                                    this.avatar.Position = new Vector2(pos.X, pos.Y + this.avatar.WalkingSpeed);
+                                    this.avatar.Position = new Vector2(pos.X, pos.Y + speed);
                                 }
                             }
                         }
@@ -388,18 +321,28 @@ namespace WindowsGame2
                             {
                                 mapPos.X = 1;
                             }
-                            int leftTile = this.map.BottomLayer[(int)mapPos.X - 1, (int)mapPos.Y];
-                            if (this.chipset.Tiles[leftTile].IsWalkable)
+                            else if (mapPos.X % 1 > increment)
+                            {
+                                mapPos.X = (int)(mapPos.X + 1);
+                            }
+                            int west = this.map.BottomLayer[(int)mapPos.X - 1, (int)mapPos.Y];
+                            int westSouth = this.map.BottomLayer[(int)mapPos.X - 1, (int)mapPos.Y + 1];
+                            if (mapPos.Y % 1 < increment || (1 - mapPos.Y % 1) < increment)
+                            {
+                                westSouth = west;
+                            }
+                            if (this.chipset.Tiles[west].IsWalkable &&
+                                this.chipset.Tiles[westSouth].IsWalkable)
                             {
                                 float newfocx = foc.X - increment;
-                                if (pos.X <= (midViewWidth + this.avatar.WalkingSpeed) &&
+                                if (pos.X <= (midViewWidth + speed) &&
                                     newfocx > 0)
                                 {
                                     this.focus.X = newfocx;
                                 }
                                 else if (this.focus.X <= increment || this.focus.X >= (focusXBound - increment))
                                 {
-                                    this.avatar.Position = new Vector2(pos.X - this.avatar.WalkingSpeed, pos.Y);
+                                    this.avatar.Position = new Vector2(pos.X - speed, pos.Y);
                                 }
                             }
                         }
@@ -407,13 +350,19 @@ namespace WindowsGame2
                     else if (kbState.IsKeyDown(Keys.Right))
                     {
                         this.avatar.Direction = Direction.RIGHT;
-                        if (mapPos.X < (map.Width - 1))
+                        if (mapPos.X < (map.Width - 1 - increment))
                         {
-                            int rightTile = this.map.BottomLayer[(int)mapPos.X + 1, (int)mapPos.Y];
-                            if (this.chipset.Tiles[rightTile].IsWalkable)
+                            int east = this.map.BottomLayer[(int)mapPos.X + 1, (int)mapPos.Y];
+                            int eastSouth = this.map.BottomLayer[(int)mapPos.X + 1, (int)mapPos.Y + 1];
+                            if (mapPos.Y % 1 < increment || (1 - mapPos.Y % 1) < increment)
+                            {
+                                eastSouth = east;
+                            }
+                            if (this.chipset.Tiles[east].IsWalkable &&
+                                this.chipset.Tiles[eastSouth].IsWalkable)
                             {
                                 float newfocx = foc.X + increment;
-                                if (pos.X >= (midViewWidth - this.avatar.WalkingSpeed) &&
+                                if (pos.X >= (midViewWidth - speed) &&
                                     newfocx <= focusXBound && newfocx > 0)
                                 {
                                     this.focus.X = newfocx;
@@ -421,30 +370,26 @@ namespace WindowsGame2
                                 else if ((this.focus.X >= (focusXBound - increment) || this.focus.X <= increment) &&
                                     pos.X <= avatarXBound)
                                 {
-                                    this.avatar.Position = new Vector2(pos.X + this.avatar.WalkingSpeed, pos.Y);
+                                    this.avatar.Position = new Vector2(pos.X + speed, pos.Y);
                                 }
                             }
                         }
                     }
-                    else if (kbState.IsKeyDown(Keys.D))
+                    else if (kbState.IsKeyDown(this.MenuKey))
                     {
                         this.gameState = GameStates.ReadyMenu;
                     }
                     break;
                 case GameStates.ReadyMenu:
-                    if (kbState.IsKeyUp(Keys.D))
+                    if (kbState.IsKeyUp(this.MenuKey))
                     {
                         this.gameState = GameStates.InMenu;
                     }
                     break;
                 case GameStates.InMenu:
-                    if (kbState.IsKeyDown(Keys.D) && menu.SubMenuActive == false)
+                    if (kbState.IsKeyDown(this.MenuKey))
                     {
                         this.gameState = GameStates.ReadyWorld;
-                    }
-                    else
-                    {
-                        menu.UpdateMenu(kbState);
                     }
                     break;
                 case GameStates.InBattle:
@@ -455,6 +400,7 @@ namespace WindowsGame2
             base.Update(gameTime);
         }
 
+        #region Draw Methods
         /// <summary>
         /// This is called when the game should draw itself.
         /// </summary>
@@ -463,12 +409,22 @@ namespace WindowsGame2
         {
             spritebatch.Begin();
 
-            RenderMap();
-            RenderAvatar();
-
-            if (this.gameState == GameStates.InMenu)
+            if (this.gameState == GameStates.ReadyWorld ||
+                this.gameState == GameStates.InWorld ||
+                this.gameState == GameStates.ReadyMenu ||
+                this.gameState == GameStates.InMenu)
             {
-                RenderMenu();
+                RenderMap();
+                RenderAvatar();
+                if (this.gameState == GameStates.InMenu ||
+                    this.gameState == GameStates.ReadyWorld)
+                {
+                    RenderMenu();
+                }
+            }
+            else if (this.gameState == GameStates.InBattle)
+            {
+                RenderBattle();
             }
 
             spritebatch.End();
@@ -513,15 +469,15 @@ namespace WindowsGame2
             menu.Draw(spritebatch, TargetElapsedTime, party);
         }
 
-        public Vector2 GetMapPosition(Vector2 screenPosition)
+        public void RenderBattle()
         {
-            Vector2 mapPosition = new Vector2();
+            spritebatch.Draw(this.map.BattleBackground,
+                new Rectangle(0, 0, graphics.GraphicsDevice.Viewport.Width,
+                graphics.GraphicsDevice.Viewport.Width), Color.White);
 
-            mapPosition.X = focus.X + (screenPosition.X / ChipsetTile.Width);
-            mapPosition.Y = focus.Y + (screenPosition.Y / ChipsetTile.Height);
-
-            return mapPosition;
+            this.battle.Draw(spritebatch, TargetElapsedTime);
         }
+        #endregion
 
         public Vector2 GetAvatarMapPosition(Avatar av)
         {

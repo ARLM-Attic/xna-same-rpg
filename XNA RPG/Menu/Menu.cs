@@ -145,7 +145,7 @@ namespace XNA_RPG.Menu
             {
                 mainSubmenu.Draw(spritebatch, party, menuFont);
             }
-
+   
             foreach (SubMenu submenu in submenus)
             {
                 spritebatch.DrawString(menuFont, submenu.Title,
@@ -208,3 +208,4 @@ namespace XNA_RPG.Menu
         }
     }
 }
+

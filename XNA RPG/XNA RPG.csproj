@@ -54,6 +54,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Battling\Battle.cs">
+      <XNAUseContentPipeline>false</XNAUseContentPipeline>
+      <Name>Class1</Name>
+    </Compile>
     <Compile Include="Character\Accessory.cs">
       <XNAUseContentPipeline>false</XNAUseContentPipeline>
       <Name>Accessory</Name>
@@ -93,6 +97,26 @@
     <Compile Include="Character\Party.cs">
       <XNAUseContentPipeline>false</XNAUseContentPipeline>
       <Name>Party</Name>
+    </Compile>
+    <Compile Include="Items\ApplicableItem.cs">
+      <XNAUseContentPipeline>false</XNAUseContentPipeline>
+      <Name>Class1</Name>
+    </Compile>
+    <Compile Include="Items\EquipableItem.cs">
+      <XNAUseContentPipeline>false</XNAUseContentPipeline>
+      <Name>Class2</Name>
+    </Compile>
+    <Compile Include="Items\Inventory.cs">
+      <XNAUseContentPipeline>false</XNAUseContentPipeline>
+      <Name>Class4</Name>
+    </Compile>
+    <Compile Include="Items\Item.cs">
+      <XNAUseContentPipeline>false</XNAUseContentPipeline>
+      <Name>Item</Name>
+    </Compile>
+    <Compile Include="Items\Weapon.cs">
+      <XNAUseContentPipeline>false</XNAUseContentPipeline>
+      <Name>Class3</Name>
     </Compile>
     <Compile Include="Mapping\Chipset.cs">
       <XNAUseContentPipeline>false</XNAUseContentPipeline>
