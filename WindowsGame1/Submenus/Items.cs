@@ -11,6 +11,7 @@ using Microsoft.Xna.Framework.Storage;
 using XNA_RPG.Mapping;
 using XNA_RPG.Character;
 using XNA_RPG.Menu;
+using XNA_RPG.Input;
 
 namespace WindowsGame1.Submenus
 {
@@ -45,7 +46,7 @@ namespace WindowsGame1.Submenus
             itemIndex = 0;
 
             first = true;
-            waitingKey = Keys.Left;
+            waitingKey = (Keys) Input.Left;
         }
 
         public override void Draw(SpriteBatch spritebatch, Party party, SpriteFont spriteFont)
@@ -122,7 +123,7 @@ namespace WindowsGame1.Submenus
             if (first == true)
             {
 
-                if (keyboard.IsKeyUp(Keys.F))
+                if (keyboard.IsKeyUp((Keys) Input.Confirm))
                 {
                     first = false;
                 }
@@ -135,40 +136,40 @@ namespace WindowsGame1.Submenus
             {
                 case ChoiceState.Home:
 
-                    if (keyboard.IsKeyDown(Keys.Left))
+                    if (keyboard.IsKeyDown((Keys) Input.Left))
                     {
                         state = ChoiceState.HomeReady;
-                        waitingKey = Keys.Left;
+                        waitingKey = (Keys) Input.Left;
                     }
 
-                    else if (keyboard.IsKeyDown(Keys.Right))
+                    else if (keyboard.IsKeyDown((Keys) Input.Right))
                     {
                         state = ChoiceState.HomeReady;
-                        waitingKey = Keys.Right;
+                        waitingKey = (Keys) Input.Right;
                     }
 
-                    else if (keyboard.IsKeyDown(Keys.Back))
+                    else if (keyboard.IsKeyDown((Keys) Input.Cancel))
                     {
                         first = true;
                         return false;
                     }
 
-                    else if (keyboard.IsKeyDown(Keys.F))
+                    else if (keyboard.IsKeyDown((Keys) Input.Confirm) && inventory.Count > 0)
                     {
                         if (handIndex == 0)
                         {
                             state = ChoiceState.UseReady;
-                            waitingKey = Keys.F;
+                            waitingKey = (Keys) Input.Confirm;
                         }
                         else if (handIndex == 1)
                         {
-                            state = ChoiceState.SortReady;
-                            waitingKey = Keys.F;
+                            state = ChoiceState.SortReady ;
+                            waitingKey = (Keys) Input.Confirm;
                         }
                         else if (handIndex == 2)
                         {
                             state = ChoiceState.DiscardReady;
-                            waitingKey = Keys.F;
+                            waitingKey = (Keys) Input.Confirm;
                         }
 
                         handIndex = 0;
@@ -178,19 +179,19 @@ namespace WindowsGame1.Submenus
 
                 case ChoiceState.HomeReady:
 
-                    if (keyboard.IsKeyUp(Keys.Left) && waitingKey == Keys.Left
+                    if (keyboard.IsKeyUp((Keys) Input.Left) && waitingKey == (Keys) Input.Left
                         && handIndex > 0)
                     {
                         handIndex--;
                         state = ChoiceState.Home;
                     }
-                    else if (keyboard.IsKeyUp(Keys.Right) && waitingKey == Keys.Right
+                    else if (keyboard.IsKeyUp((Keys) Input.Right) && waitingKey == (Keys) Input.Right
                         && handIndex < 2)
                     {
                         handIndex++;
                         state = ChoiceState.Home;
                     }
-                    else if (keyboard.IsKeyUp(Keys.Back) && waitingKey == Keys.Back)
+                    else if (keyboard.IsKeyUp((Keys) Input.Cancel) && waitingKey == (Keys) Input.Cancel)
                     {
                         state = ChoiceState.Home;
                         handIndex = 0;
@@ -200,27 +201,27 @@ namespace WindowsGame1.Submenus
 
                 case ChoiceState.UseReady:
 
-                    if (keyboard.IsKeyUp(Keys.F) && waitingKey == Keys.F)
+                    if (keyboard.IsKeyUp((Keys) Input.Confirm) && waitingKey == (Keys) Input.Confirm)
                     {
                         state = ChoiceState.Use;
 
                     }
 
-                    else if (keyboard.IsKeyUp(Keys.Down) && waitingKey == Keys.Down)
+                    else if (keyboard.IsKeyUp((Keys) Input.Down) && waitingKey == (Keys) Input.Down)
                     {
                         handIndex++;
                         state = ChoiceState.Use;
 
                     }
 
-                    else if (keyboard.IsKeyUp(Keys.Up) && waitingKey == Keys.Up)
+                    else if (keyboard.IsKeyUp((Keys) Input.Up) && waitingKey == (Keys) Input.Up)
                     {
                         handIndex--;
                         state = ChoiceState.Use;
 
                     }
 
-                    else if (keyboard.IsKeyUp(Keys.Back) && waitingKey == Keys.Back)
+                    else if (keyboard.IsKeyUp((Keys) Input.Cancel) && waitingKey == (Keys) Input.Cancel)
                     {
                         state = ChoiceState.Use;
                         handIndex = itemIndex;
@@ -230,28 +231,28 @@ namespace WindowsGame1.Submenus
 
                 case ChoiceState.Use:
 
-                    if (keyboard.IsKeyDown(Keys.Back))
+                    if (keyboard.IsKeyDown((Keys) Input.Cancel))
                     {
                         state = ChoiceState.HomeReady;
-                        waitingKey = Keys.Back;
+                        waitingKey = (Keys) Input.Cancel;
                     }
 
-                    else if (keyboard.IsKeyDown(Keys.Down) && handIndex < inventory.Count - 1)
+                    else if (keyboard.IsKeyDown((Keys) Input.Down) && handIndex < inventory.Count - 1)
                     {
                         state = ChoiceState.UseReady;
-                        waitingKey = Keys.Down;
+                        waitingKey = (Keys) Input.Down;
                     }
 
-                    else if (keyboard.IsKeyDown(Keys.Up) && handIndex > 0)
+                    else if (keyboard.IsKeyDown((Keys) Input.Up) && handIndex > 0)
                     {
                         state = ChoiceState.UseReady;
-                        waitingKey = Keys.Up;
+                        waitingKey = (Keys) Input.Up;
                     }
 
-                    else if (keyboard.IsKeyDown(Keys.F))
+                    else if (keyboard.IsKeyDown((Keys) Input.Confirm))
                     {
                         state = ChoiceState.UseCharReady;
-                        waitingKey = Keys.F;
+                        waitingKey = (Keys) Input.Confirm;
                         itemIndex = handIndex;
                         handIndex = 0;
                     }
@@ -259,18 +260,18 @@ namespace WindowsGame1.Submenus
 
                 case ChoiceState.UseCharReady:
 
-                    if (keyboard.IsKeyUp(Keys.F) && waitingKey == Keys.F)
+                    if (keyboard.IsKeyUp((Keys) Input.Confirm) && waitingKey == (Keys) Input.Confirm)
                     {
                         state = ChoiceState.UseChar;
                     }
 
-                    else if (keyboard.IsKeyUp(Keys.Down) && waitingKey == Keys.Down)
+                    else if (keyboard.IsKeyUp((Keys) Input.Down) && waitingKey == (Keys) Input.Down)
                     {
                         state = ChoiceState.UseChar;
                         handIndex++;
                     }
 
-                    else if (keyboard.IsKeyUp(Keys.Up) && waitingKey == Keys.Up)
+                    else if (keyboard.IsKeyUp((Keys) Input.Up) && waitingKey == (Keys) Input.Up)
                     {
                         state = ChoiceState.UseChar;
                         handIndex--;
@@ -280,35 +281,35 @@ namespace WindowsGame1.Submenus
 
                 case ChoiceState.UseChar:
 
-                    if (keyboard.IsKeyDown(Keys.F))
+                    if (keyboard.IsKeyDown((Keys) Input.Confirm))
                     {
-                        waitingKey = Keys.F;
+                        waitingKey = (Keys) Input.Confirm;
                         state = ChoiceState.ApplyItemReady;
                     }
 
-                    else if (keyboard.IsKeyDown(Keys.Up) && handIndex > 0)
+                    else if (keyboard.IsKeyDown((Keys) Input.Up) && handIndex > 0)
                     {
                         state = ChoiceState.UseCharReady;
-                        waitingKey = Keys.Up;
+                        waitingKey = (Keys) Input.Up;
                     }
 
-                    else if (keyboard.IsKeyDown(Keys.Down) && handIndex < party.ActiveMembers.Count - 1)
+                    else if (keyboard.IsKeyDown((Keys) Input.Down) && handIndex < party.ActiveMembers.Count - 1)
                     {
                         state = ChoiceState.UseCharReady;
-                        waitingKey = Keys.Down;
+                        waitingKey = (Keys) Input.Down;
                     }
 
-                    else if (keyboard.IsKeyDown(Keys.Back))
+                    else if (keyboard.IsKeyDown((Keys) Input.Cancel))
                     {
                         state = ChoiceState.UseReady;
-                        waitingKey = Keys.Back;
+                        waitingKey = (Keys) Input.Cancel;
                     }
 
                     return true;
 
                 case ChoiceState.ApplyItemReady:
 
-                    if (keyboard.IsKeyUp(Keys.F) && waitingKey == Keys.F)
+                    if (keyboard.IsKeyUp((Keys) Input.Confirm) && waitingKey == (Keys) Input.Confirm)
                     {
                         state = ChoiceState.ApplyItem;
                     }

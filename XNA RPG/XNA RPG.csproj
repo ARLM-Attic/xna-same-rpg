@@ -10,7 +10,7 @@
     <AssemblyName>XNA RPG</AssemblyName>
     <XnaFrameworkVersion>v1.0</XnaFrameworkVersion>
     <XnaPlatform>Windows</XnaPlatform>
-    <XNAGlobalContentPipelineAssemblies>Microsoft.Xna.Framework.Content.Pipeline.EffectImporter.dll;Microsoft.Xna.Framework.Content.Pipeline.FBXImporter.dll;Microsoft.Xna.Framework.Content.Pipeline.TextureImporter.dll;Microsoft.Xna.Framework.Content.Pipeline.XImporter.dll</XNAGlobalContentPipelineAssemblies>
+    <XNAGlobalContentPipelineAssemblies>Microsoft.Xna.Framework.Content.Pipeline.FBXImporter.dll;Microsoft.Xna.Framework.Content.Pipeline.XImporter.dll;Microsoft.Xna.Framework.Content.Pipeline.EffectImporter.dll;Microsoft.Xna.Framework.Content.Pipeline.TextureImporter.dll</XNAGlobalContentPipelineAssemblies>
     <XNAProjectContentPipelineAssemblies>
     </XNAProjectContentPipelineAssemblies>
   </PropertyGroup>
@@ -97,6 +97,10 @@
     <Compile Include="Character\Party.cs">
       <XNAUseContentPipeline>false</XNAUseContentPipeline>
       <Name>Party</Name>
+    </Compile>
+    <Compile Include="Input\Input.cs">
+      <XNAUseContentPipeline>false</XNAUseContentPipeline>
+      <Name>Input</Name>
     </Compile>
     <Compile Include="Items\ApplicableItem.cs">
       <XNAUseContentPipeline>false</XNAUseContentPipeline>

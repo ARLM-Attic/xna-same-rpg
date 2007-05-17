@@ -13,6 +13,7 @@ using XNA_RPG.Menu;
 using XNA_RPG.XML;
 using XNA_RPG.Items;
 using WindowsGame1.Submenus;
+using XNA_RPG.Input;
 
 namespace WindowsGame2
 {
@@ -37,6 +38,7 @@ namespace WindowsGame2
 
         private XMLAgent xmlAgent;
         private GameStates gameState;
+        private TimeSpan playTime;
 
         //party
         private Party party;
@@ -49,10 +51,7 @@ namespace WindowsGame2
         //Constants/Enums
         public enum GameStates { InStartMenu, ReadyWorld, InWorld, ReadyMenu,
             InMenu, InBattle };
-        public Keys ConfirmKey = Keys.F;
-        public Keys CancelKey = Keys.S;
-        public Keys MenuKey = Keys.D;
-        public Keys MapKey = Keys.A;
+
         #endregion
 
         public Game2()
@@ -74,6 +73,7 @@ namespace WindowsGame2
             this.gameState = GameStates.InWorld;
             this.xmlAgent = new XMLAgent();
             this.avatar = new Avatar();
+            this.playTime = new TimeSpan(0);
 
             InitializeChipsets();
             InitializeMaps();
@@ -285,13 +285,15 @@ namespace WindowsGame2
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Update(GameTime gameTime)
         {
+            playTime += TargetElapsedTime;
             KeyboardState kbState = Keyboard.GetState();
+
             switch (this.gameState)
             {
                 case GameStates.InStartMenu:
                     break;
                 case GameStates.ReadyWorld:
-                    if (kbState.IsKeyUp(this.MenuKey))
+                    if (kbState.IsKeyUp((Keys)Input.Menu))
                     {
                         this.gameState = GameStates.InWorld;
                     }
@@ -301,9 +303,9 @@ namespace WindowsGame2
                     Vector2 foc = this.focus;
                     Vector2 mapPos = this.GetAvatarMapPosition(this.avatar);
 
-                    // Check for movement
-                    if (kbState.IsKeyDown(Keys.Up) || kbState.IsKeyDown(Keys.Down) ||
-                        kbState.IsKeyDown(Keys.Left) || kbState.IsKeyDown(Keys.Right))
+                    #region Movement and Collision
+                    if (kbState.IsKeyDown((Keys) Input.Up) || kbState.IsKeyDown((Keys) Input.Down) ||
+                        kbState.IsKeyDown((Keys) Input.Left) || kbState.IsKeyDown((Keys) Input.Right))
                     {
                         this.avatar.IsMoving = true;
                     }
@@ -320,7 +322,7 @@ namespace WindowsGame2
                     float avatarXBound = this.graphics.GraphicsDevice.Viewport.Width - ChipsetTile.Width;
                     float speed = this.avatar.WalkingSpeed;
                     float increment = speed / 100.0f;
-                    if (kbState.IsKeyDown(Keys.Up))
+                    if (kbState.IsKeyDown((Keys) Input.Up))
                     {
                         this.avatar.Direction = Direction.UP;
                         if (mapPos.Y > 0)
@@ -354,7 +356,7 @@ namespace WindowsGame2
                             }
                         }
                     }
-                    else if (kbState.IsKeyDown(Keys.Down))
+                    else if (kbState.IsKeyDown((Keys) Input.Down))
                     {
                         this.avatar.Direction = Direction.DOWN;
                         if (mapPos.Y < (map.Height - 1 - increment))
@@ -382,7 +384,7 @@ namespace WindowsGame2
                             }
                         }
                     }
-                    else if (kbState.IsKeyDown(Keys.Left))
+                    else if (kbState.IsKeyDown((Keys) Input.Left))
                     {
                         this.avatar.Direction = Direction.LEFT;
                         if (mapPos.X > 0)
@@ -417,7 +419,7 @@ namespace WindowsGame2
                             }
                         }
                     }
-                    else if (kbState.IsKeyDown(Keys.Right))
+                    else if (kbState.IsKeyDown((Keys) Input.Right))
                     {
                         this.avatar.Direction = Direction.RIGHT;
                         if (mapPos.X < (map.Width - 1 - increment))
@@ -445,13 +447,15 @@ namespace WindowsGame2
                             }
                         }
                     }
-                    else if (kbState.IsKeyDown(this.MenuKey))
+                    #endregion
+
+                    else if (kbState.IsKeyDown((Keys)Input.Menu))
                     {
                         this.gameState = GameStates.ReadyMenu;
                     }
                     break;
                 case GameStates.ReadyMenu:
-                    if (kbState.IsKeyUp(this.MenuKey))
+                    if (kbState.IsKeyUp((Keys)Input.Menu))
                     {
                         this.gameState = GameStates.InMenu;
                     }
@@ -460,7 +464,7 @@ namespace WindowsGame2
 
                     menu.UpdateMenu(kbState, party);
 
-                    if (kbState.IsKeyDown(this.MenuKey))
+                    if (kbState.IsKeyDown((Keys)Input.Menu) && menu.SubMenuActive == false)
                     {
                         this.gameState = GameStates.ReadyWorld;
                     }
@@ -539,7 +543,7 @@ namespace WindowsGame2
                 new Rectangle(0, 0, graphics.GraphicsDevice.Viewport.Width,
                 graphics.GraphicsDevice.Viewport.Height), Color.White);
 
-            menu.Draw(spritebatch, TargetElapsedTime, party);
+            menu.Draw(spritebatch, playTime, party);
         }
 
         public void RenderBattle()

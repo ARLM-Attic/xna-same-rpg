@@ -137,9 +137,9 @@ namespace XNA_RPG.Menu
             handIndex = 0;
         }
 
-        public void Draw(SpriteBatch spritebatch, TimeSpan time, Party party)
+        public void Draw(SpriteBatch spritebatch,TimeSpan playTime, Party party)
         {
-            spritebatch.DrawString(menuFont, GetPlayTime(gameTime),
+            spritebatch.DrawString(menuFont, GetPlayTime(playTime),
                 new Vector2(640, 492), Color.White);
 
             if (subMenuActive == false)
