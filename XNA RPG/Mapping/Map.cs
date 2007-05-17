@@ -7,6 +7,7 @@ using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Storage;
+using XNA_RPG.Events;
 
 namespace XNA_RPG.Mapping
 {
@@ -16,11 +17,13 @@ namespace XNA_RPG.Mapping
         private Chipset chipset;
         private int width;
         private int height;
+        private string name;
 
         private int[,] bottomLayer;
         private int[,] middleLayer;
         private int[,] topLayer;
         private ChipsetTile[,] objectLayer;
+        private Event[,] eventLayer;
 
         private Vector2 focus;
 
@@ -119,6 +122,18 @@ namespace XNA_RPG.Mapping
                 battleBackground = value;
             }
         }
+
+        public string Name
+        {
+            get
+            {
+                return this.name;
+            }
+            set
+            {
+                name = value;
+            }
+        }
         #endregion
 
         #region Constructors
@@ -129,18 +144,22 @@ namespace XNA_RPG.Mapping
             this.middleLayer = new int[0, 0];
             this.topLayer = new int[0, 0];
             this.objectLayer = new ChipsetTile[0, 0];
+            this.eventLayer = new Event[0, 0];
+            this.name = "?";
         }
 
-        public Map(Chipset chipset, int width, int height)
+        public Map(Chipset chipset, int width, int height, string name)
         {
             this.chipset = chipset;
             this.width = width;
             this.height = height;
+            this.name = name;
 
             bottomLayer = new int[width, height];
             middleLayer = new int[width, height];
             topLayer = new int[width, height];
             objectLayer = new ChipsetTile[width, height];
+            eventLayer = new Event[width, height];
         }
         #endregion
 
@@ -152,6 +171,16 @@ namespace XNA_RPG.Mapping
                 {
                     bottomLayer[i,j] = chipsetIndices[j * height + i];
                 }
+            }
+        }
+
+        public void OnTouchEvent(Vector2 tilePosition)
+        {
+            if (eventLayer[(int)tilePosition.X, (int)tilePosition.Y] != null
+                && eventLayer[(int)tilePosition.X, (int)tilePosition.Y].GetType().FullName == "Events.OnTouchEvent")
+
+            {
+                eventLayer[(int)tilePosition.X, (int)tilePosition.Y].Trigger();
             }
         }
     }

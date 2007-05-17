@@ -10,7 +10,7 @@ using Microsoft.Xna.Framework.Storage;
 using XNA_RPG.Mapping;
 using XNA_RPG.Character;
 using XNA_RPG.Menu;
-
+using XNA_RPG.Input;
 
 namespace XNA_RPG.Menu
 {
@@ -137,10 +137,13 @@ namespace XNA_RPG.Menu
             handIndex = 0;
         }
 
-        public void Draw(SpriteBatch spritebatch,TimeSpan playTime, Party party)
+        public void Draw(SpriteBatch spritebatch,TimeSpan playTime, Party party, string mapName)
         {
             spritebatch.DrawString(menuFont, GetPlayTime(playTime),
                 new Vector2(640, 492), Color.White);
+
+            spritebatch.DrawString(menuFont, mapName,
+                new Vector2(520, 552), Color.White);
 
             if (subMenuActive == false)
             {
@@ -190,17 +193,17 @@ namespace XNA_RPG.Menu
             }
             else
             {
-                if (keyboard.IsKeyDown(Keys.F))
+                if (keyboard.IsKeyDown((Keys) Input.Input.Confirm))
                 {
                     subMenuActive = true;
                     selectedIndex = handIndex;
 
                 }
-                else if (keyboard.IsKeyDown(Keys.Up) && handIndex != 0)
+                else if (keyboard.IsKeyDown((Keys)Input.Input.Up) && handIndex != 0)
                 {
                     handIndex--;
                 }
-                else if (keyboard.IsKeyDown(Keys.Down) && handIndex != submenus.Count - 1)
+                else if (keyboard.IsKeyDown((Keys)Input.Input.Down) && handIndex != submenus.Count - 1)
                 {
                     handIndex++;
                 }

@@ -98,6 +98,18 @@
       <XNAUseContentPipeline>false</XNAUseContentPipeline>
       <Name>Party</Name>
     </Compile>
+    <Compile Include="Events\Event.cs">
+      <XNAUseContentPipeline>false</XNAUseContentPipeline>
+      <Name>Event</Name>
+    </Compile>
+    <Compile Include="Events\OnPressedEvent.cs">
+      <XNAUseContentPipeline>false</XNAUseContentPipeline>
+      <Name>OnPressedEvent</Name>
+    </Compile>
+    <Compile Include="Events\OnTouchEvent.cs">
+      <XNAUseContentPipeline>false</XNAUseContentPipeline>
+      <Name>OnTouchEvent</Name>
+    </Compile>
     <Compile Include="Input\Input.cs">
       <XNAUseContentPipeline>false</XNAUseContentPipeline>
       <Name>Input</Name>

@@ -106,7 +106,7 @@ namespace WindowsGame2
         public void InitializeMaps()
         {
             //Create Map
-            map = new Map(chipset, 50, 50);
+            map = new Map(chipset, 50, 50, "Big Map");
             map.InsertIntoBottomLayer(new int[]{
                 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
                 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
@@ -160,7 +160,7 @@ namespace WindowsGame2
                 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
             });
 
-            map = new Map(chipset, 20, 20);
+            map = new Map(chipset, 20, 20, "Medium Map");
         }
         
         public void InitializeMenu()
@@ -543,7 +543,7 @@ namespace WindowsGame2
                 new Rectangle(0, 0, graphics.GraphicsDevice.Viewport.Width,
                 graphics.GraphicsDevice.Viewport.Height), Color.White);
 
-            menu.Draw(spritebatch, playTime, party);
+            menu.Draw(spritebatch, playTime, party, map.Name);
         }
 
         public void RenderBattle()
