@@ -132,6 +132,14 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\Audio\Menu\Waves\MenuNav.wav">
+      <XNAUseContentPipeline>false</XNAUseContentPipeline>
+      <Name>MenuNav</Name>
+    </Content>
+    <Content Include="Content\Audio\Menu\Waves\save.wav">
+      <XNAUseContentPipeline>false</XNAUseContentPipeline>
+      <Name>save</Name>
+    </Content>
     <Content Include="Content\Fonts\Arial17.spritefont">
       <XNAUseContentPipeline>true</XNAUseContentPipeline>
       <Importer>FontDescriptionImporter</Importer>
