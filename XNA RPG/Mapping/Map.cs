@@ -177,7 +177,7 @@ namespace XNA_RPG.Mapping
         public void OnTouchEvent(Vector2 tilePosition)
         {
             if (eventLayer[(int)tilePosition.X, (int)tilePosition.Y] != null
-                && eventLayer[(int)tilePosition.X, (int)tilePosition.Y].GetType().FullName == "Events.OnTouchEvent")
+                && eventLayer[(int)tilePosition.X, (int)tilePosition.Y].Type == EventType.OnTouch)
 
             {
                 eventLayer[(int)tilePosition.X, (int)tilePosition.Y].Trigger();

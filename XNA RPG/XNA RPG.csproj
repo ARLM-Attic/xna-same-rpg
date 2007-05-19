@@ -10,7 +10,7 @@
     <AssemblyName>XNA RPG</AssemblyName>
     <XnaFrameworkVersion>v1.0</XnaFrameworkVersion>
     <XnaPlatform>Windows</XnaPlatform>
-    <XNAGlobalContentPipelineAssemblies>Microsoft.Xna.Framework.Content.Pipeline.FBXImporter.dll;Microsoft.Xna.Framework.Content.Pipeline.XImporter.dll;Microsoft.Xna.Framework.Content.Pipeline.EffectImporter.dll;Microsoft.Xna.Framework.Content.Pipeline.TextureImporter.dll</XNAGlobalContentPipelineAssemblies>
+    <XNAGlobalContentPipelineAssemblies>Microsoft.Xna.Framework.Content.Pipeline.EffectImporter.dll;Microsoft.Xna.Framework.Content.Pipeline.FBXImporter.dll;Microsoft.Xna.Framework.Content.Pipeline.TextureImporter.dll;Microsoft.Xna.Framework.Content.Pipeline.XImporter.dll</XNAGlobalContentPipelineAssemblies>
     <XNAProjectContentPipelineAssemblies>
     </XNAProjectContentPipelineAssemblies>
   </PropertyGroup>
@@ -101,6 +101,10 @@
     <Compile Include="Events\Event.cs">
       <XNAUseContentPipeline>false</XNAUseContentPipeline>
       <Name>Event</Name>
+    </Compile>
+    <Compile Include="Events\EventType.cs">
+      <XNAUseContentPipeline>false</XNAUseContentPipeline>
+      <Name>EventType</Name>
     </Compile>
     <Compile Include="Events\OnPressedEvent.cs">
       <XNAUseContentPipeline>false</XNAUseContentPipeline>

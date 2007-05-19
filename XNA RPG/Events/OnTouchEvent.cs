@@ -9,7 +9,7 @@ namespace XNA_RPG.Events
         public OnTouchEvent()
             : base()
         {
-            
+            base.Type = EventType.OnTouch; 
         }
 
         public override void Trigger() { }

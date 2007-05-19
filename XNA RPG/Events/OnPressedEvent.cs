@@ -8,7 +8,9 @@ namespace XNA_RPG.Events
     {
         public OnPressedEvent()
             : base()
-        { }
+        {
+            base.Type = EventType.OnPressed;
+        }
 
         public override void Trigger()
         {
