@@ -27,6 +27,9 @@ namespace XNA_RPG.Menu
         private int selectedIndex;
         private int handIndex;
         private bool subMenuActive;
+        private AudioEngine audio;
+        private WaveBank waves;
+        private SoundBank sounds;
 
         #endregion
 
@@ -135,6 +138,10 @@ namespace XNA_RPG.Menu
             gameTime = new TimeSpan(0);
             submenus = new List<SubMenu>();
             handIndex = 0;
+
+            audio = new AudioEngine("Content\\Audio\\Menu\\MenuAudio.xgs");
+            waves = new WaveBank(audio, "Content\\Audio\\Menu\\Menu Wave.xwb");
+            sounds = new SoundBank(audio, "Content\\Audio\\Menu\\Menu Sound.xsb");
         }
 
         public void Draw(SpriteBatch spritebatch,TimeSpan playTime, Party party, string mapName)
@@ -195,16 +202,19 @@ namespace XNA_RPG.Menu
             {
                 if (keyboard.IsKeyDown((Keys) Input.Input.Confirm))
                 {
+                    sounds.PlayCue("MenuNav");
                     subMenuActive = true;
                     selectedIndex = handIndex;
 
                 }
                 else if (keyboard.IsKeyDown((Keys)Input.Input.Up) && handIndex != 0)
                 {
+                    sounds.PlayCue("MenuNav");
                     handIndex--;
                 }
                 else if (keyboard.IsKeyDown((Keys)Input.Input.Down) && handIndex != submenus.Count - 1)
                 {
+                    sounds.PlayCue("MenuNav");
                     handIndex++;
                 }
                     

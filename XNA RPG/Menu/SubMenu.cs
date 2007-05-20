@@ -18,6 +18,9 @@ namespace XNA_RPG.Menu
 
         private string title;
         private ContentManager content;
+        private AudioEngine audio;
+        private WaveBank waves;
+        private SoundBank sounds;
 
         public string Title
         {
@@ -31,10 +34,37 @@ namespace XNA_RPG.Menu
             }
         }
 
+        public WaveBank Waves
+        {
+            get
+            {
+                return waves;
+            }
+            set
+            {
+                waves = value;
+            }
+        }
+
+        public SoundBank Sounds
+        {
+            get
+            {
+                return sounds;
+            }
+            set
+            {
+                sounds = value;
+            }
+        }
+
         public SubMenu(string title, ContentManager content)
         {
             this.title = title;
             this.content = content;
+            audio = new AudioEngine("Content\\Audio\\Menu\\MenuAudio.xgs");
+            waves = new WaveBank(audio, "Content\\Audio\\Menu\\Menu Wave.xwb");
+            sounds = new SoundBank(audio, "Content\\Audio\\Menu\\Menu Sound.xsb");
         }
 
         public virtual void Draw(SpriteBatch spritebatch, Party party, SpriteFont spriteFont)

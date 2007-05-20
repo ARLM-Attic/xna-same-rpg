@@ -171,7 +171,7 @@ namespace WindowsGame1.Submenus
                             state = ChoiceState.DiscardReady;
                             waitingKey = (Keys) Input.Confirm;
                         }
-
+                        Sounds.PlayCue("MenuNav");
                         handIndex = 0;
                     }
 
@@ -182,12 +182,14 @@ namespace WindowsGame1.Submenus
                     if (keyboard.IsKeyUp((Keys) Input.Left) && waitingKey == (Keys) Input.Left
                         && handIndex > 0)
                     {
+                        Sounds.PlayCue("MenuNav");
                         handIndex--;
                         state = ChoiceState.Home;
                     }
                     else if (keyboard.IsKeyUp((Keys) Input.Right) && waitingKey == (Keys) Input.Right
                         && handIndex < 2)
                     {
+                        Sounds.PlayCue("MenuNav");
                         handIndex++;
                         state = ChoiceState.Home;
                     }
@@ -203,12 +205,14 @@ namespace WindowsGame1.Submenus
 
                     if (keyboard.IsKeyUp((Keys) Input.Confirm) && waitingKey == (Keys) Input.Confirm)
                     {
+                        Sounds.PlayCue("MenuNav");
                         state = ChoiceState.Use;
 
                     }
 
                     else if (keyboard.IsKeyUp((Keys) Input.Down) && waitingKey == (Keys) Input.Down)
                     {
+                        Sounds.PlayCue("MenuNav");
                         handIndex++;
                         state = ChoiceState.Use;
 
@@ -216,6 +220,7 @@ namespace WindowsGame1.Submenus
 
                     else if (keyboard.IsKeyUp((Keys) Input.Up) && waitingKey == (Keys) Input.Up)
                     {
+                        Sounds.PlayCue("MenuNav");
                         handIndex--;
                         state = ChoiceState.Use;
 
@@ -239,6 +244,7 @@ namespace WindowsGame1.Submenus
 
                     else if (keyboard.IsKeyDown((Keys) Input.Down) && handIndex < inventory.Count - 1)
                     {
+
                         state = ChoiceState.UseReady;
                         waitingKey = (Keys) Input.Down;
                     }
@@ -262,17 +268,20 @@ namespace WindowsGame1.Submenus
 
                     if (keyboard.IsKeyUp((Keys) Input.Confirm) && waitingKey == (Keys) Input.Confirm)
                     {
+                        Sounds.PlayCue("MenuNav");
                         state = ChoiceState.UseChar;
                     }
 
                     else if (keyboard.IsKeyUp((Keys) Input.Down) && waitingKey == (Keys) Input.Down)
                     {
+                        Sounds.PlayCue("MenuNav");
                         state = ChoiceState.UseChar;
                         handIndex++;
                     }
 
                     else if (keyboard.IsKeyUp((Keys) Input.Up) && waitingKey == (Keys) Input.Up)
                     {
+                        Sounds.PlayCue("MenuNav");
                         state = ChoiceState.UseChar;
                         handIndex--;
                     }
@@ -311,6 +320,8 @@ namespace WindowsGame1.Submenus
 
                     if (keyboard.IsKeyUp((Keys) Input.Confirm) && waitingKey == (Keys) Input.Confirm)
                     {
+                        Sounds.PlayCue("Save");
+                        
                         state = ChoiceState.ApplyItem;
                     }
 

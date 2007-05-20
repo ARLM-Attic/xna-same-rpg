@@ -10,7 +10,7 @@
     <AssemblyName>XNA RPG</AssemblyName>
     <XnaFrameworkVersion>v1.0</XnaFrameworkVersion>
     <XnaPlatform>Windows</XnaPlatform>
-    <XNAGlobalContentPipelineAssemblies>Microsoft.Xna.Framework.Content.Pipeline.EffectImporter.dll;Microsoft.Xna.Framework.Content.Pipeline.FBXImporter.dll;Microsoft.Xna.Framework.Content.Pipeline.TextureImporter.dll;Microsoft.Xna.Framework.Content.Pipeline.XImporter.dll</XNAGlobalContentPipelineAssemblies>
+    <XNAGlobalContentPipelineAssemblies>Microsoft.Xna.Framework.Content.Pipeline.FBXImporter.dll;Microsoft.Xna.Framework.Content.Pipeline.XImporter.dll;Microsoft.Xna.Framework.Content.Pipeline.EffectImporter.dll;Microsoft.Xna.Framework.Content.Pipeline.TextureImporter.dll</XNAGlobalContentPipelineAssemblies>
     <XNAProjectContentPipelineAssemblies>
     </XNAProjectContentPipelineAssemblies>
   </PropertyGroup>
@@ -98,6 +98,14 @@
       <XNAUseContentPipeline>false</XNAUseContentPipeline>
       <Name>Party</Name>
     </Compile>
+    <Compile Include="Events\DialogBox.cs">
+      <XNAUseContentPipeline>false</XNAUseContentPipeline>
+      <Name>DialogBox</Name>
+    </Compile>
+    <Compile Include="Events\DialogSubEvent.cs">
+      <XNAUseContentPipeline>false</XNAUseContentPipeline>
+      <Name>DialogSubEvent</Name>
+    </Compile>
     <Compile Include="Events\Event.cs">
       <XNAUseContentPipeline>false</XNAUseContentPipeline>
       <Name>Event</Name>
@@ -113,6 +121,10 @@
     <Compile Include="Events\OnTouchEvent.cs">
       <XNAUseContentPipeline>false</XNAUseContentPipeline>
       <Name>OnTouchEvent</Name>
+    </Compile>
+    <Compile Include="Events\SubEvent.cs">
+      <XNAUseContentPipeline>false</XNAUseContentPipeline>
+      <Name>SubEvent</Name>
     </Compile>
     <Compile Include="Input\Input.cs">
       <XNAUseContentPipeline>false</XNAUseContentPipeline>

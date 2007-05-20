@@ -13,3 +13,7 @@ bin\x86\Debug\Content\Characters\Walking\testchar.xnb
 bin\x86\Debug\Content\Map\Chipsets\dirt.jpg
 bin\x86\Debug\Content\Map\Chipsets\Grass1.jpg
 bin\x86\Debug\Content\Fonts\Arial17.xnb
+bin\x86\Debug\Content\Audio\Menu\MenuAudio.xgs
+bin\x86\Debug\Content\Audio\Menu\Menu Wave.xwb
+bin\x86\Debug\Content\Audio\Menu\Menu Sound.xsb
+obj\x86\Debug\Content\Audio\Menu\MenuAudio.xml

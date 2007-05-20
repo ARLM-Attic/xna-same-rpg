@@ -4,14 +4,14 @@
     <Settings>
       <TargetPlatform>Windows</TargetPlatform>
       <BuildConfiguration>Debug</BuildConfiguration>
-      <RootDirectory>F:\Visual Studio 2005\Projects\XNA RPG\XNA RPG\</RootDirectory>
-      <IntermediateDirectory>F:\Visual Studio 2005\Projects\XNA RPG\XNA RPG\obj\x86\Debug\</IntermediateDirectory>
-      <OutputDirectory>F:\Visual Studio 2005\Projects\XNA RPG\XNA RPG\bin\x86\Debug\</OutputDirectory>
+      <RootDirectory>C:\Documents and Settings\Daniel\My Documents\Visual Studio 2005\Projects\XNA RPG\xnarpg\XNA RPG\</RootDirectory>
+      <IntermediateDirectory>C:\Documents and Settings\Daniel\My Documents\Visual Studio 2005\Projects\XNA RPG\xnarpg\XNA RPG\obj\x86\Debug\</IntermediateDirectory>
+      <OutputDirectory>C:\Documents and Settings\Daniel\My Documents\Visual Studio 2005\Projects\XNA RPG\xnarpg\XNA RPG\bin\x86\Debug\</OutputDirectory>
     </Settings>
     <Assemblies>
       <Assembly>
-        <Key>D:\WINDOWS\assembly\GAC_32\Microsoft.Xna.Framework.Content.Pipeline\1.0.0.0__6d5c3888ef60e27d\Microsoft.Xna.Framework.Content.Pipeline.dll</Key>
-        <Value>2007-04-25T11:58:05.703125-04:00</Value>
+        <Key>C:\WINDOWS\assembly\GAC_32\Microsoft.Xna.Framework.Content.Pipeline\1.0.0.0__6d5c3888ef60e27d\Microsoft.Xna.Framework.Content.Pipeline.dll</Key>
+        <Value>2007-05-11T18:44:56-04:00</Value>
       </Assembly>
     </Assemblies>
   </Asset>
