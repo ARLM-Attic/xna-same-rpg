@@ -17,3 +17,6 @@ bin\x86\Debug\Content\Audio\Menu\MenuAudio.xgs
 bin\x86\Debug\Content\Audio\Menu\Menu Wave.xwb
 bin\x86\Debug\Content\Audio\Menu\Menu Sound.xsb
 obj\x86\Debug\Content\Audio\Menu\MenuAudio.xml
+bin\x86\Debug\Content\System\DialogBox.xnb
+bin\x86\Debug\Content\Fonts\Arial13.xnb
+bin\x86\Debug\Content\Fonts\Arial9.xnb

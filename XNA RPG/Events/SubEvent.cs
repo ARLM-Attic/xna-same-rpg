@@ -16,6 +16,15 @@ namespace XNA_RPG.Events
 {
     public abstract class SubEvent
     {
+        protected ContentManager content;
+
+
+
+        public SubEvent(ContentManager content)
+        {
+            this.content = content;
+        }
+
         public abstract bool Update(KeyboardState keyboard, Party party);
 
         public abstract void Draw(SpriteBatch spritebatch);

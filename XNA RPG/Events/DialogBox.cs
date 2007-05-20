@@ -16,13 +16,29 @@ namespace XNA_RPG.Events
 {
     public class DialogBox
     {
-        private Combatant speaker;
         private string message;
+        private Texture2D background;
+        private SpriteFont font;
+        private ContentManager content;
 
-        public DialogBox(Combatant speaker, string message)
+        public DialogBox(string message, ContentManager content)
         {
-            this.speaker = speaker;
             this.message = message;
+            this.content = content;
+            background = this.content.Load<Texture2D>("Content\\System\\DialogBox");
+            font = this.content.Load<SpriteFont>("Content\\Fonts\\Arial13");
         }
+
+        public virtual void Draw(SpriteBatch spritebatch)
+        {
+            Vector2 msgSize = font.MeasureString(message);
+
+            spritebatch.Draw(background, new Rectangle(200, 400,(int)msgSize.X + 30,(int)msgSize.Y + 40), Color.White);
+
+            spritebatch.DrawString(font, message, new Vector2(215, 420), Color.White);
+
+        }
+
+
     }
 }

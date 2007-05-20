@@ -14,6 +14,7 @@ using XNA_RPG.XML;
 using XNA_RPG.Items;
 using WindowsGame1.Submenus;
 using XNA_RPG.Input;
+using XNA_RPG.Events;
 
 namespace WindowsGame2
 {
@@ -52,6 +53,7 @@ namespace WindowsGame2
         public enum GameStates { InStartMenu, ReadyWorld, InWorld, ReadyMenu,
             InMenu, InBattle };
 
+        private DialogBox testDialog;
         #endregion
 
         public Game2()
@@ -79,6 +81,7 @@ namespace WindowsGame2
             InitializeMaps();
             InitializeMenu();
             InitializeParty();
+            InitializeForTests();
 
             screenSize.X = 12;
             screenSize.Y = 12;
@@ -161,6 +164,8 @@ namespace WindowsGame2
             });
 
             map = new Map(chipset, 20, 20, "Medium Map");
+
+
         }
         
         public void InitializeMenu()
@@ -230,6 +235,11 @@ namespace WindowsGame2
             //party.Bag.AddWeapon(sword);
             //party.Bag.AddAccessory(chain);
 
+        }
+
+        public void InitializeForTests()
+        {
+            testDialog = new DialogBox("Testing 1, 2, 3...", content);
         }
         #endregion
 
@@ -475,7 +485,10 @@ namespace WindowsGame2
                     break;
             }
             base.Update(gameTime);
+            
         }
+
+        
 
         #region Draw Methods
         /// <summary>
@@ -503,6 +516,8 @@ namespace WindowsGame2
             {
                 RenderBattle();
             }
+
+            testDialog.Draw(spritebatch);
 
             spritebatch.End();
 

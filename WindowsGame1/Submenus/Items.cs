@@ -136,13 +136,13 @@ namespace WindowsGame1.Submenus
             {
                 case ChoiceState.Home:
 
-                    if (keyboard.IsKeyDown((Keys) Input.Left))
+                    if (keyboard.IsKeyDown((Keys) Input.Left) && handIndex > 0)
                     {
                         state = ChoiceState.HomeReady;
                         waitingKey = (Keys) Input.Left;
                     }
 
-                    else if (keyboard.IsKeyDown((Keys) Input.Right))
+                    else if (keyboard.IsKeyDown((Keys) Input.Right) && handIndex < 2)
                     {
                         state = ChoiceState.HomeReady;
                         waitingKey = (Keys) Input.Right;
