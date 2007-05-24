@@ -12,7 +12,6 @@ namespace XNA_RPG.Events
             base.Type = EventType.OnTouch; 
         }
 
-        public override void Trigger() { }
 
     }
 }

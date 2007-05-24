@@ -11,10 +11,5 @@ namespace XNA_RPG.Events
         {
             base.Type = EventType.OnPressed;
         }
-
-        public override void Trigger()
-        {
-            throw new Exception("The method or operation is not implemented.");
-        }
     }
 }

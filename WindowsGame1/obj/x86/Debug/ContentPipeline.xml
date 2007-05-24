@@ -82,6 +82,42 @@
       <Output>bin\x86\Debug\Content\Fonts\Arial9.xnb</Output>
       <Time>2007-05-11T00:23:57.766358-04:00</Time>
     </Item>
+    <Item>
+      <Source>Content\Characters\Menu\daniel.png</Source>
+      <Name>Content\Characters\Menu\daniel</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>SpriteTextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>bin\x86\Debug\Content\Characters\Menu\daniel.xnb</Output>
+      <Time>2007-05-10T00:30:51.5331865-04:00</Time>
+    </Item>
+    <Item>
+      <Source>Content\Characters\Menu\michael.png</Source>
+      <Name>Content\Characters\Menu\michael</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>SpriteTextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>bin\x86\Debug\Content\Characters\Menu\michael.xnb</Output>
+      <Time>2007-05-10T00:30:06.4649775-04:00</Time>
+    </Item>
+    <Item>
+      <Source>Content\Characters\Menu\vegeta.png</Source>
+      <Name>Content\Characters\Menu\vegeta</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>SpriteTextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>bin\x86\Debug\Content\Characters\Menu\vegeta.xnb</Output>
+      <Time>2007-05-10T00:33:56.3827055-04:00</Time>
+    </Item>
+    <Item>
+      <Source>Content\Fonts\Arial15.spritefont</Source>
+      <Name>Content\Fonts\Arial15</Name>
+      <Importer>FontDescriptionImporter</Importer>
+      <Processor>FontDescriptionProcessor</Processor>
+      <Options>None</Options>
+      <Output>bin\x86\Debug\Content\Fonts\Arial15.xnb</Output>
+      <Time>2007-05-24T13:30:53.832029-04:00</Time>
+    </Item>
     <Settings>
       <TargetPlatform>Windows</TargetPlatform>
       <BuildConfiguration>Debug</BuildConfiguration>

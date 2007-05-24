@@ -122,6 +122,10 @@
       <XNAUseContentPipeline>false</XNAUseContentPipeline>
       <Name>OnTouchEvent</Name>
     </Compile>
+    <Compile Include="Events\SpokenDialogBox.cs">
+      <XNAUseContentPipeline>false</XNAUseContentPipeline>
+      <Name>SpokenDialogBox</Name>
+    </Compile>
     <Compile Include="Events\SubEvent.cs">
       <XNAUseContentPipeline>false</XNAUseContentPipeline>
       <Name>SubEvent</Name>

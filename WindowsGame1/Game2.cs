@@ -53,7 +53,10 @@ namespace WindowsGame2
         public enum GameStates { InStartMenu, ReadyWorld, InWorld, ReadyMenu,
             InMenu, InBattle };
 
-        private DialogBox testDialog;
+        //Event Testing
+        private DialogSubEvent diagEvent;
+        private Event event1;
+        private Event currentEvent;
         #endregion
 
         public Game2()
@@ -239,7 +242,12 @@ namespace WindowsGame2
 
         public void InitializeForTests()
         {
-            testDialog = new DialogBox("Testing 1, 2, 3...", content);
+            diagEvent = new DialogSubEvent(content, "I...am...dying..", "Icon", 
+                "Content\\Characters\\Menu\\daniel");
+
+            event1 = new Event();
+            event1.SubEvents.Add(diagEvent);
+            
         }
         #endregion
 
@@ -463,6 +471,10 @@ namespace WindowsGame2
                     {
                         this.gameState = GameStates.ReadyMenu;
                     }
+
+                    #region Event Handling
+                    //HandleOnTouchEvents(mapPos);
+                    #endregion
                     break;
                 case GameStates.ReadyMenu:
                     if (kbState.IsKeyUp((Keys)Input.Menu))
@@ -516,8 +528,6 @@ namespace WindowsGame2
             {
                 RenderBattle();
             }
-
-            testDialog.Draw(spritebatch);
 
             spritebatch.End();
 
@@ -578,6 +588,20 @@ namespace WindowsGame2
             float clmn = this.focus.X + (pos.X / ChipsetTile.Width);
             Vector2 mapPos = new Vector2(clmn, row);
             return mapPos;
+        }
+
+        public void HandleOnTouchEvent(Vector2 mapPos, KeyboardState keyboard)
+        {
+            //Tile1
+            if (map.EventLayer[(int)mapPos.X, (int)mapPos.Y].Type == EventType.OnTouch)
+            {
+                map.EventLayer[(int)mapPos.X, (int)mapPos.Y].Update(keyboard, party);
+            }
+            //Tile2
+
+            //Tile3
+
+            //Tile4
         }
         #endregion
     }

@@ -99,6 +99,14 @@ namespace XNA_RPG.Mapping
             }
         }
 
+        public Event[,] EventLayer
+        {
+            get
+            {
+                return eventLayer;
+            }
+        }
+
         public Vector2 Focus
         {
             get
@@ -174,14 +182,16 @@ namespace XNA_RPG.Mapping
             }
         }
 
-        public void OnTouchEvent(Vector2 tilePosition)
+        public Event OnTouchEvent(Vector2 tilePosition)
         {
             if (eventLayer[(int)tilePosition.X, (int)tilePosition.Y] != null
-                && eventLayer[(int)tilePosition.X, (int)tilePosition.Y].Type == EventType.OnTouch)
+                )
 
             {
-                eventLayer[(int)tilePosition.X, (int)tilePosition.Y].Trigger();
+                return eventLayer[(int)tilePosition.X, (int)tilePosition.Y];
             }
+
+            return null;
         }
     }
 }

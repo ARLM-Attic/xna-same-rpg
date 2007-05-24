@@ -16,12 +16,12 @@ namespace XNA_RPG.Events
 {
     public class DialogBox
     {
-        private string message;
-        private Texture2D background;
-        private SpriteFont font;
-        private ContentManager content;
+        protected string message;
+        protected Texture2D background;
+        protected SpriteFont font;
+        protected ContentManager content;
 
-        public DialogBox(string message, ContentManager content)
+        public DialogBox(ContentManager content, string message)
         {
             this.message = message;
             this.content = content;
