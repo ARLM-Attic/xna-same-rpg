@@ -114,14 +114,6 @@
       <XNAUseContentPipeline>false</XNAUseContentPipeline>
       <Name>EventType</Name>
     </Compile>
-    <Compile Include="Events\OnPressedEvent.cs">
-      <XNAUseContentPipeline>false</XNAUseContentPipeline>
-      <Name>OnPressedEvent</Name>
-    </Compile>
-    <Compile Include="Events\OnTouchEvent.cs">
-      <XNAUseContentPipeline>false</XNAUseContentPipeline>
-      <Name>OnTouchEvent</Name>
-    </Compile>
     <Compile Include="Events\SpokenDialogBox.cs">
       <XNAUseContentPipeline>false</XNAUseContentPipeline>
       <Name>SpokenDialogBox</Name>
